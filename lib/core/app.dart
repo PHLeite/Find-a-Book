@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'core/home/index.dart';
+import '../pages/home/index.dart';
 
 class MyApp extends StatelessWidget {
   @override
