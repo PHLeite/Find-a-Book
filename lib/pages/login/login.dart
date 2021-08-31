@@ -13,95 +13,64 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 18),
-        child: Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height/15,
-              width: MediaQuery.of(context).size.width/2,
-              child: TextButton(
-                onPressed: () {},
-                child: Align(
-                  alignment: Alignment(-0.5, 0.0),
-                  child: Text('Cadastre-se',
-                  style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white
-                  ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child:CustomPaint(
+              painter: SetaRoxa(),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text('Cadastre-se',
+                    style: TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white
+                    ),
+                    ),
+                    ),
                   ),
                 ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Cores.roxo)
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment(0.0, -1.07),
+          
+          Padding(
+            padding: const EdgeInsets.all(30),
+            child: Align(
+              alignment: Alignment.center,
               child: Container(
-                height: MediaQuery.of(context).size.height/25,
-                width: MediaQuery.of(context).size.width/8,
-                color: Colors.white,
-                transform: Matrix4.rotationZ(0.54),
-              
+                width: MediaQuery.of(context).size.width/3,
+                height: MediaQuery.of(context).size.width/3,
+                color: Cores.laranja,
               ),
             ),
+          ),
+
             Align(
-              alignment: Alignment(-0.1, -0.85),
-              child: Container(
-                height: MediaQuery.of(context).size.height/25,
-                width: MediaQuery.of(context).size.width/8,
-                color: Colors.white,
-                transform: Matrix4.rotationZ(-0.54),
-              
+              alignment: Alignment.topCenter,
+              child: Text(
+                'FAB', 
+                style: TextStyle(
+                  color: Cores.verdeAgua,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900
+                ),
               ),
             ),
 
-            Padding(
-              padding: EdgeInsets.only(top: 100),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: MediaQuery.of(context).size.width/3,
-                  height: MediaQuery.of(context).size.width/3,
-                  color: Cores.laranja,
+            Align(
+              alignment: Alignment.topCenter,
+              child: Text(
+                'Entre ou Cadastre-se', 
+                style: TextStyle(
+                  color: Cores.verdeAgua,
+                  fontSize: 20,
+                  
                 ),
               ),
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 240),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'FAB', 
-                  style: TextStyle(
-                    color: Cores.verdeAgua,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900
-                  ),
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 275),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'Entre ou Cadastre-se', 
-                  style: TextStyle(
-                    color: Cores.verdeAgua,
-                    fontSize: 25,
-                    
-                  ),
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 325, left: 15),
+              padding: EdgeInsets.all(15),
               child: Text(
                 'E-MAIL:',
                 style: TextStyle(
@@ -113,7 +82,7 @@ class _LoginState extends State<Login> {
             ),
 
             Padding(
-              padding: const EdgeInsets.only(top: 350, right: 15, left: 15),
+              padding: const EdgeInsets.all(15),
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -126,7 +95,7 @@ class _LoginState extends State<Login> {
             ),
 
              Padding(
-              padding: EdgeInsets.only(top: 420, left: 15),
+              padding: EdgeInsets.all(15),
               child: Text(
                 'SENHA:',
                 style: TextStyle(
@@ -138,7 +107,7 @@ class _LoginState extends State<Login> {
             ),
 
             Padding(
-              padding: const EdgeInsets.only(top: 445, right: 15, left: 15),
+              padding: const EdgeInsets.all(5),
               child: TextField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -151,7 +120,7 @@ class _LoginState extends State<Login> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 500, right: 15),
+              padding: EdgeInsets.all(1),
               child: Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
@@ -168,7 +137,7 @@ class _LoginState extends State<Login> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 535),
+              padding: EdgeInsets.all(15),
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Container(
@@ -198,7 +167,7 @@ class _LoginState extends State<Login> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 595),
+              padding: EdgeInsets.all(15),
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -210,9 +179,42 @@ class _LoginState extends State<Login> {
                 ),
               ),
             )
-          ],
-        ),
+        ],
       ),
     );
   }
+}
+
+class SetaRoxa extends CustomPainter{
+  
+  @override
+  void paint(Canvas canvas, Size size) {
+    
+    
+
+  Paint paint_0 = new Paint()
+      ..color = Cores.roxo
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 1;
+     
+         
+    Path path_0 = Path();
+    path_0.moveTo(0,size.height);
+    path_0.lineTo(0,0);
+    path_0.lineTo(size.width*0.7944444,0);
+    path_0.lineTo(size.width*1.2,size.height*0.4921875);
+    path_0.lineTo(size.width*0.7967593,size.height);
+    path_0.lineTo(0,size.height);
+    path_0.close();
+
+    canvas.drawPath(path_0, paint_0);
+  
+    
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+  
 }
