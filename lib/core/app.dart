@@ -1,6 +1,6 @@
+import 'package:find_a_book/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/home/index.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: Login(),
     );
   }
 }
