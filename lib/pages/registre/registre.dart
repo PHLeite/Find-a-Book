@@ -1,4 +1,5 @@
 import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/pages/home/index.dart';
 import 'package:flutter/material.dart';
 
 class Registre extends StatefulWidget {
@@ -59,6 +60,7 @@ class _RegistreState extends State<Registre> {
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,
+            width: MediaQuery.of(context).size.width/1.1,
             alignment: Alignment.center,
             child: TextField(
                 decoration: InputDecoration(
@@ -83,6 +85,7 @@ class _RegistreState extends State<Registre> {
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,
+            width: MediaQuery.of(context).size.width/1.1,
             alignment: Alignment.center,
             child: TextField(
                 decoration: InputDecoration(
@@ -108,6 +111,7 @@ class _RegistreState extends State<Registre> {
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,
+            width: MediaQuery.of(context).size.width/1.1,
             alignment: Alignment.center,
             child: TextField(
                 obscureText: true,
@@ -134,6 +138,7 @@ class _RegistreState extends State<Registre> {
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,
+            width: MediaQuery.of(context).size.width/1.1,
             alignment: Alignment.center,
             child: TextField(
                 decoration: InputDecoration(
@@ -149,7 +154,13 @@ class _RegistreState extends State<Registre> {
             width: MediaQuery.of(context).size.width/1.5,
             height: MediaQuery.of(context).size.height/11,
             child: TextButton(
-            onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => HomePage()
+                  )
+                );
+              },
               child: Text(
                 'Registrar-se',
                 style: TextStyle(
@@ -166,7 +177,7 @@ class _RegistreState extends State<Registre> {
                 )
                 )
               ),
-            ),
+           ),
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,

@@ -1,4 +1,6 @@
 import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/pages/home/index.dart';
+import 'package:find_a_book/pages/registre/registre.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -22,7 +24,13 @@ class _LoginState extends State<Login> {
               child: CustomPaint(
                 painter: SetaRoxa(),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => Registre()
+                          )
+                        );
+                      },
                       child: Text('Cadastre-se',
                       style: TextStyle(
                         fontSize: 23,
@@ -80,6 +88,7 @@ class _LoginState extends State<Login> {
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,
+            width: MediaQuery.of(context).size.width/1.1,
             alignment: Alignment.center,
             child: TextField(
                 decoration: InputDecoration(
@@ -105,6 +114,7 @@ class _LoginState extends State<Login> {
           ),
           Container(
             height: MediaQuery.of(context).size.height/10,
+            width: MediaQuery.of(context).size.width/1.1,
             alignment: Alignment.center,
             child: TextField(
                 obscureText: true,
@@ -136,7 +146,13 @@ class _LoginState extends State<Login> {
             width: MediaQuery.of(context).size.width/1.5,
             height: MediaQuery.of(context).size.height/11,
             child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => HomePage()
+                )
+              );
+            },
               child: Text(
                 'Entrar',
                 style: TextStyle(
