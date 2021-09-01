@@ -1,72 +1,75 @@
 import 'package:find_a_book/core/cores.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  const Login({ Key? key }) : super(key: key);
+class Registre extends StatefulWidget {
+  const Registre({ Key? key }) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegistreState createState() => _RegistreState();
 }
 
-class _LoginState extends State<Login> {
+class _RegistreState extends State<Registre> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child:Container(
-              alignment: Alignment.centerLeft,
-              child: CustomPaint(
-                painter: SetaRoxa(),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text('Cadastre-se',
-                      style: TextStyle(
-                        fontSize: 23,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white
-                      ),
-                      ),
-                      ),
-                    ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width/3,
-              height: MediaQuery.of(context).size.width/3,
-              color: Cores.laranja,
-            ),
-          ),  
-          
-            Container(
-              child: Text(
-                'FAB', 
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: MediaQuery.of(context).size.height/4.5,
+            width: MediaQuery.of(context).size.width/1.2,
+            child: Text(
+                'CRIAR UMA NOVA CONTA',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Cores.verdeAgua,
-                  fontSize: 30,
+                  fontSize: 50,
                   fontWeight: FontWeight.w900
                 ),
               ),
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              height: MediaQuery.of(context).size.height/10,
-              child: Text(
-                'Entre ou Cadastre-se', 
+          ),
+          Container(
+            alignment: Alignment.center,
+            height: MediaQuery.of(context).size.height/25,
+            width: MediaQuery.of(context).size.width/1.2,
+            child: TextButton(
+                onPressed: () {},
+                child: Text('Já tem registro? Clique aqui!',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Cores.verdeAgua,
-                  fontSize: 20,
-                  
+                  fontSize: 10,
+                  fontWeight: FontWeight.w900
+                ),
+                )
+              ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width/1.2,
+            alignment: Alignment.centerLeft,
+            child: Text(
+                'NOME:',
+                style: TextStyle(
+                  color: Cores.roxo,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15
                 ),
               ),
-            ),
-            Container(
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height/10,
+            alignment: Alignment.center,
+            child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))
+                  ),
+                  hintText: 'Juliana Martins'
+                ),
+              ),
+          ),
+          Container(
             width: MediaQuery.of(context).size.width/1.2,
             alignment: Alignment.centerLeft,
             child: Text(
@@ -117,28 +120,38 @@ class _LoginState extends State<Login> {
                 ),
               ),
           ),
-            Container(
-              width: MediaQuery.of(context).size.width/1.1,
-              height: MediaQuery.of(context).size.height/15,
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                  onPressed: () {}, 
-                  child: Text(
-                    'Esqueci minha senha',
-                    style: TextStyle(
-                     fontSize: 12,
-                      color: Cores.cinza,
-                    ),
-                  )
+          Container(
+            width: MediaQuery.of(context).size.width/1.2,
+            alignment: Alignment.centerLeft,
+            child: Text(
+                'ANIVESÁRIO:',
+                style: TextStyle(
+                  color: Cores.roxo,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15
                 ),
-            ),
-            Container(
+              ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height/10,
+            alignment: Alignment.center,
+            child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))
+                  ),
+                  prefixIcon: Icon(Icons.calendar_today),
+                  hintText: 'dd/mm/yyy'
+                ),
+              ),
+          ),
+          Container(
             width: MediaQuery.of(context).size.width/1.5,
             height: MediaQuery.of(context).size.height/11,
             child: TextButton(
             onPressed: () {},
               child: Text(
-                'Entrar',
+                'Registrar-se',
                 style: TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.w800,
@@ -170,38 +183,4 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-}
-
-class SetaRoxa extends CustomPainter{
-  
-  @override
-  void paint(Canvas canvas, Size size) {
-    
-    
-
-  Paint paint_0 = new Paint()
-      ..color = Cores.roxo
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 1;
-     
-         
-    Path path_0 = Path();
-    path_0.moveTo(0,size.height);
-    path_0.lineTo(0,0);
-    path_0.lineTo(size.width*0.8944444,0);
-    path_0.lineTo(size.width*1.2,size.height*0.4921875);
-    path_0.lineTo(size.width*0.8967593,size.height);
-    path_0.lineTo(0,size.height);
-    path_0.close();
-
-    canvas.drawPath(path_0, paint_0);
-  
-    
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-  
 }
