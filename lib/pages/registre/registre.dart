@@ -1,5 +1,6 @@
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/home/index.dart';
+import 'package:find_a_book/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
 class Registre extends StatefulWidget {
@@ -34,8 +35,13 @@ class _RegistreState extends State<Registre> {
             alignment: Alignment.center,
             height: MediaQuery.of(context).size.height/25,
             width: MediaQuery.of(context).size.width/1.2,
-            child: TextButton(
-                onPressed: () {},
+            child: TextButton(onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => Login()
+                )
+              );
+            },
                 child: Text('Já tem registro? Clique aqui!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
