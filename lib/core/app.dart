@@ -1,5 +1,6 @@
 import 'package:find_a_book/pages/home/index.dart';
 import 'package:find_a_book/pages/login/login.dart';
+import 'package:find_a_book/pages/perfil/peril.dart';
 import 'package:flutter/material.dart';
 
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: Login(),
+      home: Perfil(),
     );
   }
 }
