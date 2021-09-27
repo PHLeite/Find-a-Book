@@ -1,4 +1,4 @@
-import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/HomePage/home.dart';
 import 'package:find_a_book/pages/cadastrar_livro/cadastrar.dart';
 import 'package:find_a_book/pages/chat/chat.dart';
@@ -13,71 +13,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var menuAtivo = [
-    false,
-    false,
-    false,
-    false,
+  int pageIndex = 0;
+  List<Widget> pageList = <Widget>[
+    Home(),
+    Chat(),
+    CadastrarLivro(),
+    Perfil()
   ];
-  final _pageController = new PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-       body: PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: [
-           Home(),//0
-           CadastrarLivro(),//1
-           Chat(),//2
-           Perfil(),//3
-        ],
-      ),
-
-      bottomSheet:  
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: MediaQuery.of(context).size.width-50,
-              height: MediaQuery.of(context).size.height/11,
-              decoration: BoxDecoration(
-                color: Cores.verdeAgua,
-                borderRadius: new BorderRadius.all(new Radius.circular(30)),
-              ),
-              child: Row(
-                children: [
-                  _buildItemMenu(
-                    Icons.home, 'HOME', 0, () => _pageController.jumpToPage(0)),
-                  _buildItemMenu(
-                    Icons.add, 'Cadastros', 1, () => _pageController.jumpToPage(1)),
-                _buildItemMenu(
-                    Icons.chat, 'Buscas', 2, () => _pageController.jumpToPage(2)),
-                _buildItemMenu
-                (Icons.person, 'Noticias', 3, () => _pageController.jumpToPage(3)),
-                ],
-              ),
-            ),
-          ),
-        ),
-      
-    );
-  }
-  Widget _buildItemMenu(icone, texto, indice, VoidCallback onClick) {
-    return Container(
-      width: MediaQuery.of(context).size.width/5,
-      child: TextButton(
-        child: Row(
-          children: [
-            Icon(icone, color: Colors.white),
-          ],
-        ),
-        onPressed: () {
-          onClick();
+      body: pageList[pageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: pageIndex,
+        onTap: (value){
+          setState(() {
+            pageIndex = value;
+          });
         },
-      ),
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more),
+            label: 'Cadastrar'
+          ),
+          BottomNavigationBarItem(
+            icon: CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage(Imagens.fotoPerfil),
+            ),
+            label: 'Perfil'
+          ),
+          
+        ],
+        
+      ),             
     );
-  }
+   }
 }
