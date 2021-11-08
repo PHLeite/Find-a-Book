@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: CircleAvatar(
-              radius: 15,
+              radius: 14,
               backgroundImage: AssetImage(Imagens.fotoPerfil),
             ),
             label: 'Perfil'
