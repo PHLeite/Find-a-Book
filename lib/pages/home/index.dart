@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Chat'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.more),
+            icon: Icon(Icons.bookmark_add ),
             label: 'Cadastrar'
           ),
           BottomNavigationBarItem(
