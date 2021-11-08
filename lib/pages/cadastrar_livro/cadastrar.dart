@@ -10,6 +10,9 @@ class CadastrarLivro extends StatefulWidget {
 }
 
 class _CadastrarLivroState extends State<CadastrarLivro> {
+  final items = ['novo', 'usado'];
+  String? value;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,19 +150,11 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                     ),
                   ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))
-                      ),
-                    ),
-                  ),
-              ),
+              
+              // DropdownButton(
+              //   items: items.map(buildMenuItem).toList(),
+              //   onChanged: (value) =>setState( ()=> this.value = value),
+              // ),
 
               Container(
                 width: MediaQuery.of(context).size.width/1.2,
@@ -227,4 +222,12 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
       ),
     );
   }
+  DropdownMenuItem<String> buildMenuItem(String item) =>
+    DropdownMenuItem(
+      value: item,
+      child: Text(
+        item,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+      ),
+    );
 }
