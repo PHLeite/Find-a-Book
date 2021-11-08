@@ -12,6 +12,8 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
+  final String texto = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +63,7 @@ class _PerfilState extends State<Perfil> {
           Center(
             child: Container(
               child: Text(
-                'Carla Uihysei',
+                texto,
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w900,
