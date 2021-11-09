@@ -151,10 +151,26 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   ),
               ),
               
-              // DropdownButton(
-              //   items: items.map(buildMenuItem).toList(),
-              //   onChanged: (value) =>setState( ()=> this.value = value),
-              // ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                child: Container(
+                  width: MediaQuery.of(context).size.width/1.1,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Cores.cinza, width: 1)
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      value : value,
+                      isExpanded: true,
+                      iconSize: 30,
+                      items: items.map(buildMenuItem).toList(),
+                      onChanged: (value) =>setState(()=> this.value = value as String?),
+                    ),
+                  ),
+                ),
+              ),
 
               Container(
                 width: MediaQuery.of(context).size.width/1.2,
