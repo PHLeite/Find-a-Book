@@ -145,7 +145,7 @@ class _LoginState extends State<Login> {
                     ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 55),
                   child: Container(
                   width: MediaQuery.of(context).size.width/1.5,
                   height: MediaQuery.of(context).size.height/11,
