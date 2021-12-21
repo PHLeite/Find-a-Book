@@ -30,26 +30,29 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         Container(height: MediaQuery.of(context).size.height/25,),
-        Container(
-          width: MediaQuery.of(context).size.width/1.05,
-          height: MediaQuery.of(context).size.height/13,
-          child: TextField(
-            
-            style: TextStyle(color: Colors.white),
-            cursorColor: Colors.white,
-            decoration: InputDecoration(
-              suffixIcon: Icon(Icons.search, color: Colors.white,),
-              fillColor: Cores.verdeAgua,
-              filled: true,
-              focusColor: Cores.verdeAgua,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide.none
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Container(
+            width: MediaQuery.of(context).size.width/1.05,
+            height: MediaQuery.of(context).size.height/13,
+            child: TextField(
+              
+              style: TextStyle(color: Colors.white),
+              cursorColor: Colors.white,
+              decoration: InputDecoration(
+                suffixIcon: Icon(Icons.search, color: Colors.white,),
+                fillColor: Cores.verdeAgua,
+                filled: true,
+                focusColor: Cores.verdeAgua,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none
+                ),
+                hintText: 'Harry Potter e a Pedra Filosofal',
+                hintStyle: TextStyle(color: Colors.white54)
               ),
-              hintText: 'Harry Potter e a Pedra Filosofal',
-              hintStyle: TextStyle(color: Colors.white54)
-            ),
-          )
+            )
+          ),
         ),
 
         Expanded(
