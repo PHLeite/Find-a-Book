@@ -29,32 +29,11 @@ class _PerfilState extends State<Perfil> {
                 width: MediaQuery.of(context).size.height/4,
                 height: MediaQuery.of(context).size.height/4,
                 child: Padding(
-                   padding: const EdgeInsets.all(15),
-                    child: Stack( //Para os componentes ficarem um emcima do outro
-                      children: [
-                        CircleAvatar(
-                          radius: 100,
-                          backgroundImage: NetworkImage(Imagens.fotoPerfil),
-                        ),
-                                
-                      
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            child: FloatingActionButton(
-                              backgroundColor: Cores.cinza,
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.white,
-                              ),
-                                onPressed: null,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  padding: const EdgeInsets.all(15),
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: NetworkImage(Imagens.fotoPerfil),
+                  ),   
                 ),
               ),
             ),
