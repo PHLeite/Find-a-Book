@@ -11,6 +11,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,59 +79,85 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                Container(
-                width: MediaQuery.of(context).size.width/1.2,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    'E-MAIL:',
-                    style: TextStyle(
-                      color: Cores.roxo,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15
-                    ),
-                  ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))
+                Form(
+                  key: formKey,
+                  child:Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width/1.2,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            'E-MAIL:',
+                            style: TextStyle(
+                              color: Cores.roxo,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 15
+                            ),
+                          ),
                       ),
-                      prefixIcon: Icon(Icons.email_rounded),
-                      hintText: 'exemplo@mail.com'
-                    ),
-                  ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width/1.2,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    'SENHA:',
-                    style: TextStyle(
-                      color: Cores.roxo,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15
-                    ),
-                  ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))
+                      Container(
+                        height: MediaQuery.of(context).size.height/10,
+                        width: MediaQuery.of(context).size.width/1.1,
+                        alignment: Alignment.center,
+                        child: TextFormField(
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return('Esse campo é obrigatório');
+                            }else if(!value.contains("@")){
+                              return('Esse e-mail não é válido!');
+                            }else if(value.length < 5){
+                              return('Esse e-mail está pequeno demais!');
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(15))
+                            ),
+                            prefixIcon: Icon(Icons.email_rounded),
+                            hintText: 'exemplo@mail.com'
+                          ),
+                        ),
                       ),
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: '************'
-                    ),
-                  ),
-              ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width/1.2,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                              'SENHA:',
+                              style: TextStyle(
+                                color: Cores.roxo,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15
+                              ),
+                            ),
+                        ),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height/10,
+                        width: MediaQuery.of(context).size.width/1.1,
+                        alignment: Alignment.center,
+                        child: TextFormField(
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return('Esse campo é obrigatório');
+                            }else if(value.length < 5){
+                              return('Esse e-mail está pequeno demais!');
+                            }
+                          },
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(15))
+                              ),
+                              prefixIcon: Icon(Icons.lock),
+                              hintText: '************'
+                            ),
+                          ),
+                      ),
+                    ],
+                  ) 
+                ),
                 Container(
                   width: MediaQuery.of(context).size.width/1.1,
                   height: MediaQuery.of(context).size.height/25,
@@ -145,18 +174,20 @@ class _LoginState extends State<Login> {
                     ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 55),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Container(
                   width: MediaQuery.of(context).size.width/1.5,
                   height: MediaQuery.of(context).size.height/11,
-                  child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => HomePage()
-                      )
-                    );
-                  },
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if(formKey.currentState!.validate()){
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => HomePage()
+                          )
+                        );
+                      }  
+                    },
                     child: Text(
                       'Entrar',
                       style: TextStyle(
