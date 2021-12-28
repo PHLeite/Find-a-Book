@@ -140,9 +140,9 @@ class _LoginState extends State<Login> {
                         child: TextFormField(
                           validator: (value){
                             if(value!.isEmpty){
-                              return('Esse campo é obrigatório');
+                              return('Esse campo é obrigatório!');
                             }else if(value.length < 5){
-                              return('Esse e-mail está pequeno demais!');
+                              return('A senha deve ter no mínimo 6 caracteres!');
                             }
                           },
                             obscureText: true,
