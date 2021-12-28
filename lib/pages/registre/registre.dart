@@ -11,6 +11,7 @@ class Registre extends StatefulWidget {
 }
 
 class _RegistreState extends State<Registre> {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,109 +55,148 @@ class _RegistreState extends State<Registre> {
                     )
                   ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width/1.2,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    'NOME:',
-                    style: TextStyle(
-                      color: Cores.roxo,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.2,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                          'NOME:',
+                          style: TextStyle(
+                            color: Cores.roxo,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15
+                          ),
+                        ),
                     ),
-                  ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))
+                    Container(
+                      height: MediaQuery.of(context).size.height/10,
+                      width: MediaQuery.of(context).size.width/1.1,
+                      alignment: Alignment.center,
+                      child: TextFormField(
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return('Esse campo é obrigatório!');
+                          }
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15))
+                          ),
+                          hintText: 'Juliana Martins'
+                        ),
                       ),
-                      hintText: 'Juliana Martins'
                     ),
-                  ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width/1.2,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    'E-MAIL:',
-                    style: TextStyle(
-                      color: Cores.roxo,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.2,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                          'E-MAIL:',
+                          style: TextStyle(
+                            color: Cores.roxo,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15
+                          ),
+                        ),
                     ),
-                  ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))
+                    Container(
+                      height: MediaQuery.of(context).size.height/10,
+                      width: MediaQuery.of(context).size.width/1.1,
+                      alignment: Alignment.center,
+                      child: TextFormField(
+                        validator: (value){
+                            if(value!.isEmpty){
+                              return('Esse campo é obrigatório!');
+                            }else if(!value.contains("@")){
+                              return('Esse e-mail não é válido!');
+                            }else if(value.length < 5){
+                              return('Esse e-mail está pequeno demais!');
+                            }
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                             borderRadius: BorderRadius.all(Radius.circular(15))
+                          ),
+                          prefixIcon: Icon(Icons.email_rounded),
+                          hintText: 'exemplo@mail.com'
+                        ),
                       ),
-                      prefixIcon: Icon(Icons.email_rounded),
-                      hintText: 'exemplo@mail.com'
                     ),
-                  ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width/1.2,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    'SENHA:',
-                    style: TextStyle(
-                      color: Cores.roxo,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.2,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                          'SENHA:',
+                          style: TextStyle(
+                            color: Cores.roxo,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15
+                          ),
+                        ),
                     ),
-                  ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))
+                    Container(
+                      height: MediaQuery.of(context).size.height/10,
+                      width: MediaQuery.of(context).size.width/1.1,
+                      alignment: Alignment.center,
+                      child: TextFormField(
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return('Esse campo é obrigatório!');
+                          }else if(value.length < 5){
+                            return('A senha deve ter no mínimo 6 caracteres!');
+                          }
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15))
+                          ),
+                          prefixIcon: Icon(Icons.lock),
+                          hintText: '************'
+                        ),
                       ),
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: '************'
                     ),
-                  ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width/1.2,
-                alignment: Alignment.centerLeft,
-                child: Text(
-                    'ANIVESÁRIO:',
-                    style: TextStyle(
-                      color: Cores.roxo,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.2,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                          'NASCIMENTO:',
+                          style: TextStyle(
+                            color: Cores.roxo,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15
+                          ),
+                        ),
                     ),
-                  ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height/10,
-                width: MediaQuery.of(context).size.width/1.1,
-                alignment: Alignment.center,
-                child: TextFormField(
-                  keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15))
+                    Container(
+                      height: MediaQuery.of(context).size.height/10,
+                      width: MediaQuery.of(context).size.width/1.1,
+                      alignment: Alignment.center,
+                      child: TextFormField(
+                        validator: (value){
+                            if(value!.isEmpty){
+                              return('Esse campo é obrigatório!');
+                            }else if(value.contains(RegExp(r'[A-Z]'))){
+                              return('Esse campo deve conter apenas números ou /!');
+                            }else if(value.contains(RegExp(r'[a-z]'))){
+                              return('Esse campo deve conter apenas números ou /!');
+                            }else if(value.length != 10){
+                              return('O formato é dd/mm/yyyy!');
+                            }
+                          },
+                        keyboardType: TextInputType.datetime,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15))
+                          ),
+                          prefixIcon: Icon(Icons.calendar_today),
+                          hintText: 'dd/mm/yyyy'
+                        ),
+                      ),
                     ),
-                    prefixIcon: Icon(Icons.calendar_today),
-                    hintText: 'dd/mm/yyy'
-                  ),
+                  ],
                 ),
               ),
               Padding(
@@ -164,13 +204,15 @@ class _RegistreState extends State<Registre> {
                 child: Container(
                   width: MediaQuery.of(context).size.width/1.5,
                   height: MediaQuery.of(context).size.height/11,
-                  child: TextButton(
+                  child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => HomePage()
-                        )
-                      );
+                      if(formKey.currentState!.validate()){
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => HomePage()
+                          )
+                        );
+                      }
                     },
                     child: Text(
                       'Registrar-se',
