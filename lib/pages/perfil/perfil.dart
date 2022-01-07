@@ -1,11 +1,13 @@
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/perfil/controller/info_perfil.dart';
+import 'package:find_a_book/services/auth.service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Perfil extends StatefulWidget {
-  const Perfil({ Key? key }) : super(key: key);
+  const Perfil({Key? key}) : super(key: key);
 
   @override
   _PerfilState createState() => _PerfilState();
@@ -18,59 +20,52 @@ class _PerfilState extends State<Perfil> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
-      body: 
-
-      ListView(
+      body: ListView(
         children: [
           Container(
             child: Center(
               child: Container(
-                width: MediaQuery.of(context).size.height/4,
-                height: MediaQuery.of(context).size.height/4,
+                width: MediaQuery.of(context).size.height / 4,
+                height: MediaQuery.of(context).size.height / 4,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: CircleAvatar(
                     radius: 100,
                     backgroundImage: NetworkImage(Imagens.fotoPerfil),
-                  ),   
+                  ),
                 ),
               ),
             ),
           ),
-
           Center(
             child: Container(
               child: Text(
                 texto,
                 style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 28
-                ),
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 28),
               ),
             ),
           ),
-
           Center(
             child: Container(
               child: Text(
                 'VENDEDORA',
                 style: TextStyle(
-                  color: Cores.roxo,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15
-                ),
+                    color: Cores.roxo,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15),
               ),
             ),
           ),
-
           Row(
             children: [
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20, right: 15, left: 15, bottom: 5),
+                  padding: const EdgeInsets.only(
+                      top: 20, right: 15, left: 15, bottom: 5),
                   child: Container(
                     child: Icon(
                       Icons.location_on,
@@ -79,22 +74,17 @@ class _PerfilState extends State<Perfil> {
                   ),
                 ),
               ),
-
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
                   child: Text(
                     'Divinópolis-MG',
-                    style: TextStyle(
-                      color: Cores.cinza,
-                      fontSize: 13
-                    ),
+                    style: TextStyle(color: Cores.cinza, fontSize: 13),
                   ),
                 ),
               )
             ],
           ),
-
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
@@ -102,39 +92,56 @@ class _PerfilState extends State<Perfil> {
               child: Container(
                 child: Text(
                   'A leitura engrandece a alma',
-                  style: TextStyle(
-                    fontSize: 14
-                  ),
+                  style: TextStyle(fontSize: 14),
                 ),
               ),
             ),
           ),
-
           Center(
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/20,
+                height: MediaQuery.of(context).size.height / 20,
                 decoration: BoxDecoration(
                   color: Cores.azul,
-                  borderRadius: new BorderRadius.all(new Radius.circular(100.0)),
+                  borderRadius:
+                      new BorderRadius.all(new Radius.circular(100.0)),
                 ),
-
                 child: Center(
                   child: Text(
                     'Editar Perfil',
                     style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700
-                    ),
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
             ),
           ),
-
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: OutlinedButton(
+                onPressed: () => context.read<AuthService>().logout(),
+                style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.red[200],
+                    shape: StadiumBorder(),
+                    fixedSize: Size(MediaQuery.of(context).size.width,
+                        MediaQuery.of(context).size.height / 20)),
+                child: Center(
+                  child: Text(
+                    'Sair',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Row(
             children: [
               InfoPerfil('seguidores', '26K'),
@@ -142,25 +149,22 @@ class _PerfilState extends State<Perfil> {
               InfoPerfil('A venda', '28'),
             ],
           ),
-
           Padding(
             padding: const EdgeInsets.all(15),
             child: Divider(
               height: 1,
               thickness: 0.1,
-              color:  Cores.cinza,
+              color: Cores.cinza,
             ),
           ),
-
           Center(
             child: Container(
               child: Text(
                 'LIVROS',
                 style: TextStyle(
-                  fontSize: 20,
-                  color: Cores.roxo,
-                  fontWeight: FontWeight.w700
-                ),
+                    fontSize: 20,
+                    color: Cores.roxo,
+                    fontWeight: FontWeight.w700),
               ),
             ),
           )
