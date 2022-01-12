@@ -1,5 +1,4 @@
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/home/index.dart';
 import 'package:find_a_book/pages/registre/registre.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:flutter/material.dart';
@@ -108,6 +107,7 @@ class _LoginState extends State<Login> {
                         width: MediaQuery.of(context).size.width / 1.1,
                         alignment: Alignment.center,
                         child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           controller: email,
                           validator: (value) {
                             if (value!.isEmpty) {

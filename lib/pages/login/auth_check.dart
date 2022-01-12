@@ -1,3 +1,4 @@
+import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/home/index.dart';
 import 'package:find_a_book/pages/login/login.dart';
 import 'package:find_a_book/services/auth.service.dart';
@@ -26,8 +27,12 @@ class _AuthCheckState extends State<AuthCheck> {
   }
 
   loading() {
-    return Center(
-      child: CircularProgressIndicator(),
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(
+          color: Cores.verdeAgua,
+        ),
+      ),
     );
   }
 }

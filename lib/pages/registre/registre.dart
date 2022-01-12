@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/home/index.dart';
 import 'package:find_a_book/pages/login/login.dart';
 import 'package:find_a_book/services/auth.service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +18,20 @@ class _RegistreState extends State<Registre> {
   final formKey = GlobalKey<FormState>();
   final senha = TextEditingController();
   final email = TextEditingController();
+  final nome = TextEditingController();
+  final nasc = TextEditingController();
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  User? user = FirebaseAuth.instance.currentUser;
   bool loading = false;
 
   registrar() async {
-    setState(() => loading = true);
     try {
-      await context.read<AuthService>().login(email.text, senha.text);
+      await context.read<AuthService>().registrar(email.text, senha.text);
+      users.doc().set({
+        'nome': nome.text,
+        'email': email.text,
+        'nasc': nasc.text,
+      });
     } on AuthExeption catch (e) {
       setState(() => loading = false);
       ScaffoldMessenger.of(context)
@@ -88,6 +98,7 @@ class _RegistreState extends State<Registre> {
                       width: MediaQuery.of(context).size.width / 1.1,
                       alignment: Alignment.center,
                       child: TextFormField(
+                        controller: nome,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return ('Esse campo é obrigatório!');
@@ -116,6 +127,7 @@ class _RegistreState extends State<Registre> {
                       width: MediaQuery.of(context).size.width / 1.1,
                       alignment: Alignment.center,
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         controller: email,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -183,6 +195,7 @@ class _RegistreState extends State<Registre> {
                       width: MediaQuery.of(context).size.width / 1.1,
                       alignment: Alignment.center,
                       child: TextFormField(
+                        controller: nasc,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return ('Esse campo é obrigatório!');
@@ -218,8 +231,7 @@ class _RegistreState extends State<Registre> {
                       }
                       /* if (formKey.currentState!.validate()) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomePage()));
-                      } */
+                            builder: (context) => HomePage())); */
                     },
                     child: Text(
                       'Registrar-se',
@@ -248,6 +260,14 @@ class _RegistreState extends State<Registre> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  loadingScreen() {
+    return Center(
+      child: CircularProgressIndicator(
+        color: Cores.verdeAgua,
       ),
     );
   }
