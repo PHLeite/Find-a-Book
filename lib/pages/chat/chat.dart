@@ -1,4 +1,3 @@
-import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/chat/quadradochat.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,4 @@
 import 'package:find_a_book/pages/login/auth_check.dart';
-import 'package:find_a_book/pages/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

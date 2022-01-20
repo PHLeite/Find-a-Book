@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/home/index.dart';
 import 'package:find_a_book/pages/login/login.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
