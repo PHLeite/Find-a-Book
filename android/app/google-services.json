@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "870410848099",
+    "project_id": "find-a-book-tcc",
+    "storage_bucket": "find-a-book-tcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870410848099:android:4ef09d6fde40fab2543556",
+        "android_client_info": {
+          "package_name": "br.com.fab.find_a_book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870410848099-4dmc57pr3pb9fbv6b8fd3p3g28fjlqc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoVEPWshl14QVHINa-AR5ZlKRCydF5EYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870410848099-4dmc57pr3pb9fbv6b8fd3p3g28fjlqc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
