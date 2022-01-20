@@ -76,6 +76,7 @@ class _HomeState extends State<Home> {
                 Categorie(Categoria: "Técnicos"),
                 Categorie(Categoria: "Auto Ajuda"),
                 Categorie(Categoria: "Religiosos"),
+                Categorie(Categoria: "Terror"),
                 ],
               ),
             ),

@@ -23,7 +23,7 @@ class LivrosUI extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height/3.64,
+              height: MediaQuery.of(context).size.height/3,
               width: MediaQuery.of(context).size.width/2.5,
               decoration: BoxDecoration(
                 image: DecorationImage(
