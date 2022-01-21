@@ -1,7 +1,6 @@
 import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/HomePage/home.dart';
 import 'package:find_a_book/pages/cadastrar_livro/cadastrar.dart';
-import 'package:find_a_book/pages/chat/chat.dart';
 import 'package:find_a_book/pages/perfil/perfil.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   int pageIndex = 0;
   List<Widget> pageList = <Widget>[
     Home(),
-    Chat(),
     CadastrarLivro(),
     Perfil()
   ];
@@ -36,11 +34,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat'
-          ),
+          ),        
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark_add ),
             label: 'Cadastrar'

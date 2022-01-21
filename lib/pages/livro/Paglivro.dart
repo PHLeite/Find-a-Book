@@ -1,6 +1,5 @@
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/core/imagens.dart';
-import 'package:find_a_book/pages/chat/chatOpen.dart';
 import 'package:find_a_book/pages/livro/livro.dart';
 import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:flutter/material.dart';
@@ -166,11 +165,7 @@ class _PagLivroState extends State<PagLivro> {
                     height: MediaQuery.of(context).size.height/20,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ChatOpen()
-                          )
-                        );
+                        
                       },
                       child: Text(
                         'Iniciar Chat',
