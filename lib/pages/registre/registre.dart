@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/login/login.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +22,8 @@ class _RegistreState extends State<Registre> {
   final senha = TextEditingController();
   final email = TextEditingController();
   final nome = TextEditingController();
-  final nasc = TextEditingController();
+  final local = TextEditingController();
+  File? file;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -28,10 +33,13 @@ class _RegistreState extends State<Registre> {
     try {
       setState(() => loading = true);
       await context.read<AuthService>().registrar(email.text, senha.text);
-      users.doc('${user!.uid}').set({
+      users.doc(email.text).set({
         'nome': nome.text,
+        'perfil': null,
+        'linkZap': null,
+        'livros': null,
         'email': email.text,
-        'nasc': nasc.text,
+        'local': local.text,
       });
     } on AuthExeption catch (e) {
       setState(() => loading = false);
@@ -84,25 +92,26 @@ class _RegistreState extends State<Registre> {
                 child: Column(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width/1.2,
+                      width: MediaQuery.of(context).size.width / 1.2,
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Foto de perfil:',
                         style: TextStyle(
-                          color: Cores.roxo,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 15
-                        ),
+                            color: Cores.roxo,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15),
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width/5,
-                      height: MediaQuery.of(context).size.width/5,
+                      width: MediaQuery.of(context).size.width / 5,
+                      height: MediaQuery.of(context).size.width / 5,
                       child: FloatingActionButton(
                         backgroundColor: Cores.azul,
-                        onPressed: () {},
+                        onPressed: () {
+                          escolherFoto();
+                        },
                         child: Icon(
-                          Icons.add_a_photo, 
+                          Icons.add_a_photo,
                           color: Colors.white,
                           size: 40,
                         ),
@@ -209,7 +218,7 @@ class _RegistreState extends State<Registre> {
                       width: MediaQuery.of(context).size.width / 1.2,
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'NASCIMENTO:',
+                        'LOCALIZAÇÃO:',
                         style: TextStyle(
                             color: Cores.roxo,
                             fontWeight: FontWeight.w800,
@@ -221,25 +230,26 @@ class _RegistreState extends State<Registre> {
                       width: MediaQuery.of(context).size.width / 1.1,
                       alignment: Alignment.center,
                       child: TextFormField(
-                        controller: nasc,
+                        controller: local,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return ('Esse campo é obrigatório!');
-                          } else if (value.contains(RegExp(r'[A-Z]'))) {
+                          }
+                          /* else if (value.contains(RegExp(r'[A-Z]'))) {
                             return ('Esse campo deve conter apenas números ou /!');
                           } else if (value.contains(RegExp(r'[a-z]'))) {
                             return ('Esse campo deve conter apenas números ou /!');
                           } else if (value.length != 10) {
                             return ('O formato é dd/mm/yyyy!');
-                          }
+                          } */
                         },
-                        keyboardType: TextInputType.datetime,
+                        keyboardType: TextInputType.streetAddress,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15))),
-                            prefixIcon: Icon(Icons.calendar_today),
-                            hintText: 'dd/mm/yyyy'),
+                            prefixIcon: Icon(Icons.location_on_sharp),
+                            hintText: 'São Paulo'),
                       ),
                     ),
                   ],
@@ -259,6 +269,7 @@ class _RegistreState extends State<Registre> {
                           );
                         } else {
                           registrar();
+                          uploadFoto();
                         }
                       }
                       /* if (formKey.currentState!.validate()) {
@@ -302,5 +313,21 @@ class _RegistreState extends State<Registre> {
         color: Cores.verdeAgua,
       ),
     );
+  }
+
+  Future escolherFoto() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+
+    setState(() => file = File(path));
+  }
+
+  Future uploadFoto() async {
+    if (file == null) return;
+    await FirebaseStorage.instance
+        .ref('uploads/${email.text}/foto.png')
+        .putFile(file!);
+    print("DEU CERTO POW");
   }
 }

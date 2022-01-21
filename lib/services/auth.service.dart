@@ -9,6 +9,7 @@ class AuthExeption implements Exception {
 class AuthService extends ChangeNotifier {
   FirebaseAuth _auth = FirebaseAuth.instance;
   User? usuario;
+  //String? email = FirebaseAuth.instance.currentUser!.email;
   bool isLoading = true;
 
   AuthService() {
