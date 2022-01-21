@@ -28,6 +28,10 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
+  getCurrentUser() async {
+    return usuario;
+  }
+
   registrar(String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);

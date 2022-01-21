@@ -186,7 +186,13 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        login();
+                        if (loading == true) {
+                          Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          login();
+                        }
                       }
                       /* if (formKey.currentState!.validate()) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(

@@ -22,12 +22,14 @@ class _RegistreState extends State<Registre> {
   final nasc = TextEditingController();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   User? user = FirebaseAuth.instance.currentUser;
+
   bool loading = false;
 
-  registrar() async {
+  Future<void> registrar() async {
     try {
+      setState(() => loading = true);
       await context.read<AuthService>().registrar(email.text, senha.text);
-      users.doc().set({
+      users.doc('${user!.uid}').set({
         'nome': nome.text,
         'email': email.text,
         'nasc': nasc.text,
@@ -227,7 +229,13 @@ class _RegistreState extends State<Registre> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        registrar();
+                        if (loading == true) {
+                          Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          registrar();
+                        }
                       }
                       /* if (formKey.currentState!.validate()) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
