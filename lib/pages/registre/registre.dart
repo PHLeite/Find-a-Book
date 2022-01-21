@@ -84,6 +84,31 @@ class _RegistreState extends State<Registre> {
                 child: Column(
                   children: [
                     Container(
+                      width: MediaQuery.of(context).size.width/1.2,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Foto de perfil:',
+                        style: TextStyle(
+                          color: Cores.roxo,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/5,
+                      height: MediaQuery.of(context).size.width/5,
+                      child: FloatingActionButton(
+                        backgroundColor: Cores.azul,
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.add_a_photo, 
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                    Container(
                       width: MediaQuery.of(context).size.width / 1.2,
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -224,7 +249,7 @@ class _RegistreState extends State<Registre> {
                 padding: const EdgeInsets.only(top: 15),
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
-                  height: MediaQuery.of(context).size.height / 11,
+                  height: MediaQuery.of(context).size.height / 12.5,
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -251,7 +276,7 @@ class _RegistreState extends State<Registre> {
                         backgroundColor:
                             MaterialStateProperty.all(Cores.verdeAgua),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(30),
                         ))),
                   ),
                 ),

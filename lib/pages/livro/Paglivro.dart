@@ -1,5 +1,4 @@
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/livro/livro.dart';
 import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:flutter/material.dart';
@@ -155,38 +154,41 @@ class _PagLivroState extends State<PagLivro> {
                   height: MediaQuery.of(context).size.height / 12,
                   child: CircleAvatar(
                     radius: 15,
-                    backgroundImage: NetworkImage(Imagens.fotoPerfil),
+                    backgroundImage: NetworkImage('https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png'),
                   ),
                 ),
               ),
-              Column(
-                children: [
-                  Container(
-                    child: Text('Alessandra Resende',
-                        style: TextStyle(fontSize: 15)),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.height / 20,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Iniciar Chat',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
-                      ),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Cores.roxo),
-                          shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ))),
+              Padding(
+                padding: const EdgeInsets.only(top: 70),
+                child: Column(
+                  children: [
+                    Container(
+                      child: Text('Alessandra Resende',
+                          style: TextStyle(fontSize: 15)),
                     ),
-                  ),
-                ],
+                    Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.height / 20,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Iniciar Chat',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white),
+                        ),
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Cores.roxo),
+                            shape:
+                                MaterialStateProperty.all(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ))),
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           )
