@@ -1,7 +1,8 @@
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/perfil/controller/info_perfil.dart';
+import 'package:find_a_book/pages/perfil/editarperfil.dart';
 import 'package:find_a_book/services/auth.service.dart';
+import 'package:find_a_book/shared/components/livrosUI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,13 +26,13 @@ class _PerfilState extends State<Perfil> {
           Container(
             child: Center(
               child: Container(
-                width: MediaQuery.of(context).size.height / 4,
-                height: MediaQuery.of(context).size.height / 4,
+                width: MediaQuery.of(context).size.height / 5,
+                height: MediaQuery.of(context).size.height / 5,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
                   child: CircleAvatar(
                     radius: 100,
-                    backgroundImage: NetworkImage(Imagens.fotoPerfil),
+                    backgroundImage: NetworkImage('https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png'),
                   ),
                 ),
               ),
@@ -45,17 +46,6 @@ class _PerfilState extends State<Perfil> {
                     color: Colors.black,
                     fontWeight: FontWeight.w900,
                     fontSize: 28),
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              child: Text(
-                'VENDEDORA',
-                style: TextStyle(
-                    color: Cores.roxo,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15),
               ),
             ),
           ),
@@ -76,10 +66,13 @@ class _PerfilState extends State<Perfil> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Container(
-                  child: Text(
-                    'Divinópolis-MG',
-                    style: TextStyle(color: Cores.cinza, fontSize: 13),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Container(
+                    child: Text(
+                      'Divinópolis-MG',
+                      style: TextStyle(color: Cores.cinza, fontSize: 13),
+                    ),
                   ),
                 ),
               )
@@ -100,6 +93,13 @@ class _PerfilState extends State<Perfil> {
           Center(
             child: Padding(
               padding: const EdgeInsets.all(15),
+              child: OutlinedButton(
+                onPressed: () =>  Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Editar()
+                  )
+                ),
+                
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 20,
@@ -108,6 +108,7 @@ class _PerfilState extends State<Perfil> {
                   borderRadius:
                       new BorderRadius.all(new Radius.circular(100.0)),
                 ),
+              
                 child: Center(
                   child: Text(
                     'Editar Perfil',
@@ -117,6 +118,7 @@ class _PerfilState extends State<Perfil> {
                         fontWeight: FontWeight.w700),
                   ),
                 ),
+              ),
               ),
             ),
           ),
@@ -158,16 +160,32 @@ class _PerfilState extends State<Perfil> {
             ),
           ),
           Center(
-            child: Container(
-              child: Text(
-                'LIVROS',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Cores.roxo,
-                    fontWeight: FontWeight.w700),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 15),
+              child: Container(
+                child: Text(
+                  'LIVROS',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Cores.roxo,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
-          )
+          ),
+          
+          Row(
+            children: [
+              LivrosUI(photo: "assets/images/livro1.jpg", preco: "39,90"),
+              LivrosUI(photo: "assets/images/livro2.jpg", preco: "15,90"),
+            ],
+          ),
+          Row(
+            children: [
+              LivrosUI(photo: "assets/images/livro3.jpg", preco: "29,90"),
+              LivrosUI(photo: "assets/images/livro4.jpg", preco: "69,90"),
+            ],
+          ),               
         ],
       ),
     );

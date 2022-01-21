@@ -182,7 +182,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(top: 15),
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
-                  height: MediaQuery.of(context).size.height / 11,
+                  height: MediaQuery.of(context).size.height / 12.5,
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
@@ -210,7 +210,7 @@ class _LoginState extends State<Login> {
                         backgroundColor:
                             MaterialStateProperty.all(Cores.verdeAgua),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(30),
                         ))),
                   ),
                 ),

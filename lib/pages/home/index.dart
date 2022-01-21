@@ -1,4 +1,3 @@
-import 'package:find_a_book/core/imagens.dart';
 import 'package:find_a_book/pages/HomePage/home.dart';
 import 'package:find_a_book/pages/cadastrar_livro/cadastrar.dart';
 import 'package:find_a_book/pages/perfil/perfil.dart';
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: CircleAvatar(
               radius: 14,
-              backgroundImage: AssetImage(Imagens.fotoPerfil),
+              backgroundImage: NetworkImage('https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png'),
             ),
             label: 'Perfil'
           ),
