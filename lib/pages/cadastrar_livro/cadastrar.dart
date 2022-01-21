@@ -11,6 +11,9 @@ class CadastrarLivro extends StatefulWidget {
 
 class _CadastrarLivroState extends State<CadastrarLivro> {
   final items = ['novo', 'usado'];
+  String item = "usado";
+  String categoria = "Romance";
+  final categorias = ["Ficção", "Romance",  "Biografia", "Infanto-Juvenis", "Brasileiros", "Poesias", "Contos", "Coleções","Técnicos", "Auto Ajuda", "Religiosos","Terror"];
   String? value;
 
   @override
@@ -22,19 +25,22 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
           Column(
             children: [
               
-              Container(
-                alignment: Alignment.bottomCenter,
-                height: MediaQuery.of(context).size.height/4.5,
-                width: MediaQuery.of(context).size.width/1.2,
-                child: Text(
-                    'CADASTRAR LIVRO',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Cores.verdeAgua,
-                      fontSize: 45,
-                      fontWeight: FontWeight.w900
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  height: MediaQuery.of(context).size.height/4.5,
+                  width: MediaQuery.of(context).size.width/1.2,
+                  child: Text(
+                      'CADASTRAR LIVRO',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Cores.verdeAgua,
+                        fontSize: 45,
+                        fontWeight: FontWeight.w900
+                      ),
                     ),
-                  ),
+                ),
               ),
 
               Container(
@@ -50,8 +56,8 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width/4,
-                height: MediaQuery.of(context).size.width/4,
+                width: MediaQuery.of(context).size.width/5,
+                height: MediaQuery.of(context).size.width/5,
                 child: FloatingActionButton(
                   backgroundColor: Cores.azul,
                   onPressed: () {},
@@ -152,7 +158,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
               ),
               
               Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                padding: const EdgeInsets.only(top: 5, bottom: 15),
                 child: Container(
                   width: MediaQuery.of(context).size.width/1.1,
                   alignment: Alignment.center,
@@ -166,7 +172,41 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                       isExpanded: true,
                       iconSize: 30,
                       items: items.map(buildMenuItem).toList(),
-                      onChanged: (value) =>setState(()=> this.value = value as String?),
+                      onChanged: (value) =>setState(()=> this.item = value as String),
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(
+                width: MediaQuery.of(context).size.width/1.2,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                    'Categoria:',
+                    style: TextStyle(
+                      color: Cores.roxo,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15
+                    ),
+                  ),
+              ),
+              
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 15),
+                child: Container(
+                  width: MediaQuery.of(context).size.width/1.1,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Cores.cinza, width: 1)
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      value : value,
+                      isExpanded: true,
+                      iconSize: 30,
+                      items: categorias.map(buildMenuItem).toList(),
+                      onChanged: (value) =>setState(()=> this.categoria = value as String),
                     ),
                   ),
                 ),
@@ -197,13 +237,38 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   ),
               ),
 
+              Container(
+                width: MediaQuery.of(context).size.width/1.2,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                    'Link para contato: ',
+                    style: TextStyle(
+                      color: Cores.roxo,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15
+                    ),
+                  ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height/10,
+                width: MediaQuery.of(context).size.width/1.1,
+                alignment: Alignment.center,
+                child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))
+                      ),
+                    ),
+                  ),
+              ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Container(
                     width: MediaQuery.of(context).size.width/1.5,
-                    height: MediaQuery.of(context).size.height/11,
+                    height: MediaQuery.of(context).size.height/12,
                     child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
@@ -224,7 +289,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                         backgroundColor: MaterialStateProperty.all(Cores.verdeAgua),
                         shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(30),
                         )
                         )
                       ),

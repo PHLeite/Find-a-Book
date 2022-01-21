@@ -35,59 +35,18 @@ class _PagLivroState extends State<PagLivro> {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 170, top: 20),
-            child: Container(
-              child: Text(
-                'NOVO',
-                style: TextStyle(
-                    color: Cores.azul,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Container(
+                child: Text(
+                  'NOVO',
+                  style: TextStyle(
+                      color: Cores.azul,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18),
+                ),
               ),
-            ),
-          ),
-          Container(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 125, top: 15),
-                  child: Text(
-                    'Autor: ',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Text(
-                    'Stephen King',
-                    style: TextStyle(color: Colors.black, fontSize: 17),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 135),
-                  child: Text(
-                    'Editora: ',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18),
-                  ),
-                ),
-                Text(
-                  'Suma',
-                  style: TextStyle(color: Colors.black, fontSize: 17),
-                ),
-              ],
             ),
           ),
           Container(
@@ -114,8 +73,7 @@ class _PagLivroState extends State<PagLivro> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 150),
+          Center(
             child: Container(
               child: Text(
                 "R\$70,90",
@@ -126,34 +84,72 @@ class _PagLivroState extends State<PagLivro> {
               ),
             ),
           ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 8),
+              child: Text(
+                'Descrição',
+                style: TextStyle(
+                    color: Cores.verdeAgua,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(right: 40, left: 40, bottom: 15),
+              child: Text(
+                'O livro fala sobre uma palhaço que aterroriza a vida das crianças de uma cidade',
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+          ),
           Container(
-            child: Column(
+            child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 8),
+                  padding: const EdgeInsets.only(left: 40),
                   child: Text(
-                    'Descrição',
+                    'Autor: ',
                     style: TextStyle(
-                        color: Cores.verdeAgua,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18),
                   ),
                 ),
+                Text(
+                  'Stephen King',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.only(right: 40, left: 40, bottom: 15),
+                  padding: const EdgeInsets.only(left: 40),
                   child: Text(
-                    'O livro fala sobre uma palhaço que aterroriza a vida das crianças de um cidade',
-                    style: TextStyle(fontSize: 15),
+                    'Editora: ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18),
                   ),
-                )
+                ),
+                Text(
+                  'Suma',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
+                ),
               ],
             ),
           ),
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(60, 10, 0, 10),
+                padding: const EdgeInsets.fromLTRB(70, 70, 0, 10),
                 child: Container(
                   width: MediaQuery.of(context).size.width / 5,
                   height: MediaQuery.of(context).size.height / 12,
@@ -173,14 +169,7 @@ class _PagLivroState extends State<PagLivro> {
                     width: MediaQuery.of(context).size.width / 3,
                     height: MediaQuery.of(context).size.height / 20,
                     child: TextButton(
-                      onPressed: () {
-<<<<<<< HEAD
-                        
-=======
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ChatOpen()));
->>>>>>> 6276a047f5a9caa619143ab7991ac08aa9496d92
-                      },
+                      onPressed: () {},
                       child: Text(
                         'Iniciar Chat',
                         style: TextStyle(
