@@ -22,6 +22,30 @@ class _EditarState extends State<Editar> {
     return Scaffold(
       body: ListView(
         children: [
+          Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                child: Container(
+                  width: MediaQuery.of(context).size.width/7,
+                  height: MediaQuery.of(context).size.width/7,
+                  decoration: BoxDecoration(
+                    borderRadius: new BorderRadius.all(new Radius.circular(100)),
+                    color: Cores.verdeAgua
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
             child: Container(
