@@ -1,9 +1,6 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/db/perfil_repository.dart';
-import 'package:find_a_book/pages/perfil/controller/info_perfil.dart';
 import 'package:find_a_book/pages/perfil/editarperfil.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
@@ -23,7 +20,7 @@ class Perfil extends StatefulWidget {
 class _PerfilState extends State<Perfil> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   String? email = FirebaseAuth.instance.currentUser!.email;
-  String path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+  String path = '';
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +44,9 @@ class _PerfilState extends State<Perfil> {
           if (true) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
+            if(path == ''){
+              printUrl();
+            }
             return Scaffold(
               backgroundColor: Colors.white,
               body: ListView(
@@ -113,7 +113,7 @@ class _PerfilState extends State<Perfil> {
                       padding: const EdgeInsets.only(left: 15, right: 15),
                       child: Container(
                         child: Text(
-                          'A leitura engrandece a alma',
+                          data['bio'],
                           style: TextStyle(fontSize: 14),
                         ),
                       ),
@@ -170,21 +170,28 @@ class _PerfilState extends State<Perfil> {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      InfoPerfil('seguidores', '26K'),
-                      InfoPerfil('Vendas', '255'),
-                      InfoPerfil('A venda', '28'),
-                    ],
-                  ),
                   Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Divider(
-                      height: 1,
-                      thickness: 0.1,
-                      color: Cores.cinza,
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(child: Column(children: [
+                        Text(
+                '3', 
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, 
+                    fontSize: 18
+                ),
+              ),
+              Text(
+                'A venda',
+                style: TextStyle(
+                    fontSize: 14,
+                ),
+              )
+                      ],))
                     ),
                   ),
+                  
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 15),
@@ -388,10 +395,25 @@ class _PerfilState extends State<Perfil> {
   }
 
   printUrl() async {
-    var ref = FirebaseStorage.instance.ref().child('uploads/$email/foto.png');
-    String url = (await ref.getDownloadURL()).toString();
-    setState(() {
-      path = url;
-    });
+    try{
+      var ref = FirebaseStorage.instance.ref().child('uploads/$email/fotoDePerfil');
+     String url = (await ref.getDownloadURL()).toString();
+     print("$url");
+      if(url != ''){
+        setState(() {
+          path = url;
+        });
+      }else{
+        print("Deu bosta");
+        setState(() {
+          path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+        });
+      }
+    } on Exception catch (e){
+      setState(() {
+          path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+        });
+      print("Deu merda");
+    }
   }
 }

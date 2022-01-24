@@ -34,6 +34,7 @@ class _RegistreState extends State<Registre> {
       setState(() => loading = true);
       await context.read<AuthService>().registrar(email.text, senha.text);
       users.doc(email.text).set({
+        'bio': null,
         'nome': nome.text,
         'perfil': null,
         'linkZap': null,

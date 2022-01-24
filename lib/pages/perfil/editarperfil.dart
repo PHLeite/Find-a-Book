@@ -1,4 +1,10 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:find_a_book/core/cores.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,13 +16,31 @@ class Editar extends StatefulWidget {
 }
 
 class _EditarState extends State<Editar> {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  String? email = FirebaseAuth.instance.currentUser!.email;
   final formKey = GlobalKey<FormState>();
-  final senha = TextEditingController();
+  
+  final local = TextEditingController();
   final nome = TextEditingController();
   final bio = TextEditingController();
+  File? file;
 
   bool loading = false;
 
+  updatePerfil() async{
+    if(local.text != ''){
+      await users.doc(email).update({'local': local.text});
+    }
+    if(bio.text != ''){
+      await users.doc(email).update({'bio': bio.text});
+    }
+    if(nome.text != ''){
+      await users.doc(email).update({'nome': nome.text});
+    }
+    if(file != null){
+      uploadFoto();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +109,9 @@ class _EditarState extends State<Editar> {
                       height: MediaQuery.of(context).size.width/5,
                       child: FloatingActionButton(
                         backgroundColor: Cores.azul,
-                        onPressed: () {},
+                        onPressed: () {
+                          escolherFoto();
+                        },
                         child: Icon(
                           Icons.add_a_photo, 
                           color: Colors.white,
@@ -119,7 +145,7 @@ class _EditarState extends State<Editar> {
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15))),
-                            hintText: 'Juliana Martins'),
+                        ),
                       ),
                     ), 
                     Container(
@@ -143,14 +169,14 @@ class _EditarState extends State<Editar> {
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15))),
-                            hintText: 'A leitura engrandece a alma'),
+                        ),
                       ),
                     ), 
                     Container(
                       width: MediaQuery.of(context).size.width / 1.2,
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Editar Senha:',
+                        'Local: ',
                         style: TextStyle(
                             color: Cores.roxo,
                             fontWeight: FontWeight.w800,
@@ -162,21 +188,19 @@ class _EditarState extends State<Editar> {
                       width: MediaQuery.of(context).size.width / 1.1,
                       alignment: Alignment.center,
                       child: TextFormField(
-                        controller: senha,
+                        controller: local,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return ('Esse campo é obrigatório!');
-                          } else if (value.length < 5) {
-                            return ('A senha deve ter no mínimo 6 caracteres!');
-                          }
+                          } 
                         },
                         obscureText: true,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15))),
-                            prefixIcon: Icon(Icons.lock),
-                            hintText: '************'),
+                            prefixIcon: Icon(Icons.location_on_sharp),
+                        ),
                       ),
                     ),
                   ],
@@ -189,6 +213,7 @@ class _EditarState extends State<Editar> {
               height: MediaQuery.of(context).size.height / 12.5,
               child: ElevatedButton(
                 onPressed: () {
+                  updatePerfil();
                   Navigator.of(context).pop();   
                 },
                 child: Text(
@@ -213,5 +238,20 @@ class _EditarState extends State<Editar> {
         ],
       ),
     );
+  }
+  Future escolherFoto() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path!;
+
+    setState(() => file = File(path));
+  }
+
+  Future uploadFoto() async {
+    if (file == null) return;
+    await FirebaseStorage.instance
+        .ref('uploads/$email/fotoDePerfil')
+        .putFile(file!);
+    print("DEU CERTO POW");
   }
 }

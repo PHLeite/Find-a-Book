@@ -39,10 +39,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Cadastrar'
           ),
           BottomNavigationBarItem(
-            icon: CircleAvatar(
-              radius: 14,
-              backgroundImage: NetworkImage('https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png'),
-            ),
+            icon: Icon(Icons.person),
             label: 'Perfil'
           ),
           
