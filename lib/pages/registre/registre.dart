@@ -331,4 +331,6 @@ class _RegistreState extends State<Registre> {
         .putFile(file!);
     print("DEU CERTO POW");
   }
+
+  
 }

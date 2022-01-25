@@ -16,6 +16,7 @@ class CadastrarLivro extends StatefulWidget {
 
 class _CadastrarLivroState extends State<CadastrarLivro> {
   CollectionReference books = FirebaseFirestore.instance.collection('books');
+  // int QtdLivros = FirebaseFirestore.instance.collection('books').get().then((QuerySnapshot querySnapshot) {querySnapshot.docs.forEach((doc) {QtdLiros + 1})})
   String? email = FirebaseAuth.instance.currentUser!.email;
   final formKey = GlobalKey<FormState>();
   final items = ['Novo', 'Usado'];
@@ -29,6 +30,8 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
   final editora = TextEditingController();
   final link = TextEditingController();
   final descricao = TextEditingController();
+  String? foto = '';
+
 
   Future<void> registrarLivro() async {
     try {
@@ -37,16 +40,19 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
         'nome': nome.text,
         'autor': autor.text,
         'link': link.text,
+        // 'path/Id': d, 
         'userEmail': email,
-        'path': file,
         'descricao': descricao.text,
         'categoria': categoria,
         'estado': item,
       });
+      uploadFoto();
       print("Vamo que vamo");
     } on Exception catch (e) {
+      print("exception ta fudendo tudo");
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Falha ao cadastrar livro")));
+      print("Ta mesmo");
     }
   }
 
@@ -97,6 +103,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   child: FloatingActionButton(
                     backgroundColor: Cores.azul,
                     onPressed: () {
+                      escolherFoto();
                     },
                     child: Icon(
                       Icons.add_a_photo, 
@@ -123,6 +130,12 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   alignment: Alignment.center,
                   child: TextFormField(
                     controller: nome,
+                    validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Esse campo é obrigatório!');
+                          }
+                          
+                        },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))
@@ -147,8 +160,14 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   height: MediaQuery.of(context).size.height/10,
                   width: MediaQuery.of(context).size.width/1.1,
                   alignment: Alignment.center,
-                  child: TextField(
+                  child: TextFormField(
                     controller: autor,
+                    validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Esse campo é obrigatório!');
+                          }
+                          
+                        },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))
@@ -173,8 +192,14 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   height: MediaQuery.of(context).size.height/10,
                   width: MediaQuery.of(context).size.width/1.1,
                   alignment: Alignment.center,
-                  child: TextField(
+                  child: TextFormField(
                     controller: editora,
+                    validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Esse campo é obrigatório!');
+                          }
+                          
+                        },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))
@@ -268,8 +293,14 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   height: MediaQuery.of(context).size.height/10,
                   width: MediaQuery.of(context).size.width/1.1,
                   alignment: Alignment.center,
-                  child: TextField(
+                  child: TextFormField(
                     controller: descricao,
+                    validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Esse campo é obrigatório!');
+                          }
+                          
+                        },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15))
@@ -294,7 +325,13 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   height: MediaQuery.of(context).size.height/10,
                   width: MediaQuery.of(context).size.width/1.1,
                   alignment: Alignment.center,
-                  child: TextField(
+                  child: TextFormField(
+                    validator: (value) {
+                          if (value!.isEmpty) {
+                            return ('Esse campo é obrigatório!');
+                          }
+                          
+                        },
                     controller: link,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -312,12 +349,19 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                       width: MediaQuery.of(context).size.width/1.5,
                       height: MediaQuery.of(context).size.height/12,
                       child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => Confirmado()
-                            )
-                          );
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              printUrl();
+                              print("PRINT $foto vazio");
+                              uploadFoto();
+                              print("UPLOAD");
+                              registrarLivro();
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                builder: (context) => Confirmado()
+                                )
+                            );
+                          }
                         },
                         child: Text(
                           'Cadastrar',
@@ -355,9 +399,9 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
       ),
     );
     Future escolherFoto() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.image);
     if (result == null) return;
-    final path = result.files.single.path!;
+    final path = result.files. single.path!;
 
     setState(() => file = File(path));
   }
@@ -365,8 +409,22 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
   Future uploadFoto() async {
     if (file == null) return;
     await FirebaseStorage.instance
-        .ref('uploads/$email/books/${nome.text}')
+        .ref('uploads/$email/books/$foto')
         .putFile(file!);
     print("DEU CERTO POW");
+  }
+
+  printUrl() async {
+    try{
+      var ref = FirebaseStorage.instance.ref().child('uploads/$email/books/$foto');
+     String url = (await ref.getDownloadURL()).toString();
+     print("$url");
+      if(url != ''){
+        setState(() {
+          foto = url;
+        });
+      }} on Exception catch (e){
+      print("Deu merda");
+    }
   }
 }
