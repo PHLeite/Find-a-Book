@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:find_a_book/core/cores.dart';
@@ -19,8 +18,8 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
   CollectionReference books = FirebaseFirestore.instance.collection('books');
   String? email = FirebaseAuth.instance.currentUser!.email;
   final formKey = GlobalKey<FormState>();
-  final items = ['novo', 'usado'];
-  String item = "usado";
+  final items = ['Novo', 'Usado'];
+  String item = "Usado";
   String categoria = "Romance";
   final categorias = ["Ficção", "Romance",  "Biografia", "Infanto-Juvenis", "Brasileiros", "Poesias", "Contos", "Coleções","Técnicos", "Auto Ajuda", "Religiosos","Terror"];
   String? value;
@@ -197,7 +196,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                       ),
                     ),
                 ),
-                
+               
                 Padding(
                   padding: const EdgeInsets.only(top: 5, bottom: 15),
                   child: Container(
@@ -209,7 +208,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
-                        value : value,
+                        value : item,
                         isExpanded: true,
                         iconSize: 30,
                         items: items.map(buildMenuItem).toList(),
@@ -243,7 +242,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
-                        value : value,
+                        value : categoria,
                         isExpanded: true,
                         iconSize: 30,
                         items: categorias.map(buildMenuItem).toList(),
@@ -352,7 +351,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
       value: item,
       child: Text(
         item,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        style: TextStyle(fontSize: 20),
       ),
     );
     Future escolherFoto() async {
