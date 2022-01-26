@@ -42,6 +42,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
   final editora = TextEditingController();
   final link = TextEditingController();
   final descricao = TextEditingController();
+  final valor = TextEditingController();
   String? documentID = '';
 
   Future<void> registrarLivro() async {
@@ -55,6 +56,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
         'descricao': descricao.text,
         'categoria': categoria,
         'estado': item,
+        'valor': valor.text,
       }).then((value) => (documentID = value.id));
       uploadFoto();
     } on Exception catch (e) {
@@ -206,6 +208,35 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                   width: MediaQuery.of(context).size.width / 1.2,
                   alignment: Alignment.centerLeft,
                   child: Text(
+                    'Valor:',
+                    style: TextStyle(
+                        color: Cores.roxo,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15),
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height / 10,
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  alignment: Alignment.center,
+                  child: TextFormField(
+                    controller: valor,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return ('Esse campo é obrigatório!');
+                      }
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        hintText: 'R\$30,00'),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.2,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
                     'Condição:',
                     style: TextStyle(
                         color: Cores.roxo,
@@ -320,6 +351,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                     ),
                   ),
                 ),
+                
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: Padding(

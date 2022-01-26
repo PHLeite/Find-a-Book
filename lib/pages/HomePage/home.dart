@@ -96,26 +96,26 @@ class _HomeState extends State<Home> {
                 children: [
                   Row(
                     children: [
-                      LivrosUI(photo: "assets/images/livro1.jpg", preco: "39,90"),
-                      LivrosUI(photo: "assets/images/livro2.jpg", preco: "15,90"),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                     ],
                   ),
                   Row(
                     children: [
-                      LivrosUI(photo: "assets/images/livro3.jpg", preco: "29,90"),
-                      LivrosUI(photo: "assets/images/livro4.jpg", preco: "69,90"),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                     ],
                   ),
                   Row(
                     children: [
-                      LivrosUI(photo: "assets/images/livro3.jpg", preco: "29,90"),
-                      LivrosUI(photo: "assets/images/livro4.jpg", preco: "69,90"),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                     ],
                   ),
                   Row(
                     children: [
-                      LivrosUI(photo: "assets/images/livro3.jpg", preco: "29,90"),
-                      LivrosUI(photo: "assets/images/livro4.jpg", preco: "69,90"),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                     ],
                   ),
                 ],

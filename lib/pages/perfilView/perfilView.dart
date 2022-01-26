@@ -1,23 +1,20 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/perfil/editarperfil.dart';
-import 'package:find_a_book/services/auth.service.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class Perfil extends StatefulWidget {
-  const Perfil({Key? key}) : super(key: key);
+class PerfilView extends StatefulWidget {
+  const PerfilView({Key? key}) : super(key: key);
 
   @override
-  _PerfilState createState() => _PerfilState();
+  _PerfilViewState createState() => _PerfilViewState();
 }
 
-class _PerfilState extends State<Perfil> {
+class _PerfilViewState extends State<PerfilView> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   String? email = FirebaseAuth.instance.currentUser!.email;
   String path = '';
@@ -51,6 +48,30 @@ class _PerfilState extends State<Perfil> {
               backgroundColor: Colors.white,
               body: ListView(
                 children: [
+                  Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                child: Container(
+                  width: MediaQuery.of(context).size.width/7,
+                  height: MediaQuery.of(context).size.width/7,
+                  decoration: BoxDecoration(
+                    borderRadius: new BorderRadius.all(new Radius.circular(100)),
+                    color: Cores.verdeAgua
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ),
+              ),
+            ),
                   Container(
                     child: Center(
                       child: Container(
@@ -119,57 +140,6 @@ class _PerfilState extends State<Perfil> {
                       ),
                     ),
                   ),
-                  Center(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 15, left: 15, right: 15),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Cores.azul,
-                          shape: StadiumBorder(),
-                          side: BorderSide(
-                            color: Colors.white,
-                          ),
-                          fixedSize: Size(MediaQuery.of(context).size.width,
-                              MediaQuery.of(context).size.height / 20),
-                        ),
-                        onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Editar())),
-                        child: Center(
-                          child: Text(
-                            'Editar Perfil',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 15, left: 15, right: 15),
-                      child: OutlinedButton(
-                        onPressed: () => context.read<AuthService>().logout(),
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.red[200],
-                            shape: StadiumBorder(),
-                            fixedSize: Size(MediaQuery.of(context).size.width,
-                                MediaQuery.of(context).size.height / 20)),
-                        child: Center(
-                          child: Text(
-                            'Sair',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15),
                     child: Container(
@@ -209,15 +179,15 @@ class _PerfilState extends State<Perfil> {
                   Row(
                     children: [
                       LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
+                         livro: '5iyGvcedIplSbnD506Ld'),
                       LivrosUI(
-                         livro: 'VcVaEY4FpybWsfXnPMvg'),
+                          livro: '5iyGvcedIplSbnD506Ld'),
                     ],
                   ),
                   Row(
                     children: [
                       LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
+                         livro: '5iyGvcedIplSbnD506Ld'),
                       LivrosUI(
                           livro: '5iyGvcedIplSbnD506Ld'),
                     ],
@@ -225,7 +195,7 @@ class _PerfilState extends State<Perfil> {
                 ],
               ),
             );
-
+           
           }
         });
   }
