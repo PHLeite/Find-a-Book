@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/livro/livro.dart';
+import 'package:url_launcher/url_launcher.dart'
 import 'package:find_a_book/pages/perfilView/perfilView.dart';
 import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -89,7 +89,7 @@ class _PagLivroState extends State<PagLivro> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: 8, bottom: 15),
                     child: Center(
                       child: Container(
                         height: MediaQuery.of(context).size.height / 3,
@@ -245,7 +245,9 @@ class _PagLivroState extends State<PagLivro> {
                                     height:
                                         MediaQuery.of(context).size.height / 20,
                                     child: TextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        launch(data['link']);
+                                      },
                                       child: Text(
                                         'Iniciar Chat',
                                         style: TextStyle(

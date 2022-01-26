@@ -91,15 +91,10 @@ class _LivrosUIState extends State<LivrosUI> {
       String url = (await ref.getDownloadURL()).toString();
       print("$url");
       if (url != '') {
-        setState(() {
-          path = url;
-        });
+        path = url;
       } else {
         print("Deu bosta");
-        setState(() {
-          path =
-              'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg';
-        });
+        path = 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg';
       }
     } on Exception catch (e) {
       setState(() {
