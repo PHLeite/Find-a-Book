@@ -34,11 +34,11 @@ class _RegistreState extends State<Registre> {
       setState(() => loading = true);
       await context.read<AuthService>().registrar(email.text, senha.text);
       users.doc(email.text).set({
-        'bio': null,
+        'bio': '',
         'nome': nome.text,
-        'perfil': null,
-        'linkZap': null,
-        'livros': null,
+        'perfil': '',
+        'linkZap': '',
+        'livros': '',
         'email': email.text,
         'local': local.text,
       });
@@ -317,7 +317,8 @@ class _RegistreState extends State<Registre> {
   }
 
   Future escolherFoto() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false,  type: FileType.image);
+    final result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.image);
     if (result == null) return;
     final path = result.files.single.path!;
 
@@ -327,10 +328,8 @@ class _RegistreState extends State<Registre> {
   Future uploadFoto() async {
     if (file == null) return;
     await FirebaseStorage.instance
-        .ref('uploads/${email.text}/foto.png')
+        .ref('uploads/${email.text}/fotoDePerfil')
         .putFile(file!);
     print("DEU CERTO POW");
   }
-
-  
 }
