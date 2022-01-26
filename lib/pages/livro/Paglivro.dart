@@ -43,7 +43,9 @@ class _PagLivroState extends State<PagLivro> {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
             email = data['userEmail'];
-            printUrlLivro();
+            if (pathLivro == '') {
+              printUrlLivro();
+            }
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
@@ -202,7 +204,9 @@ class _PagLivroState extends State<PagLivro> {
                       if (true) {
                         Map<String, dynamic> data2 =
                             snapshot.data!.data() as Map<String, dynamic>;
-                        printUrlPerfil();
+                        if (pathPerfil == '') {
+                          printUrlPerfil();
+                        }
                         return Row(
                           children: [
                             Padding(

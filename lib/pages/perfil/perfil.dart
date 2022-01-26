@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/perfil/editarperfil.dart';
@@ -44,7 +43,7 @@ class _PerfilState extends State<Perfil> {
           if (true) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            if(path == ''){
+            if (path == '') {
               printUrl();
             }
             return Scaffold(
@@ -173,25 +172,24 @@ class _PerfilState extends State<Perfil> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15),
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(child: Column(children: [
-                        Text(
-                '3', 
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, 
-                    fontSize: 18
-                ),
-              ),
-              Text(
-                'A venda',
-                style: TextStyle(
-                    fontSize: 14,
-                ),
-              )
-                      ],))
-                    ),
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                            child: Column(
+                          children: [
+                            Text(
+                              '3',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            Text(
+                              'A venda',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            )
+                          ],
+                        ))),
                   ),
-                  
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 15),
@@ -208,47 +206,44 @@ class _PerfilState extends State<Perfil> {
                   ),
                   Row(
                     children: [
-                      LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
-                      LivrosUI(
-                         livro: 'VcVaEY4FpybWsfXnPMvg'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: 'VcVaEY4FpybWsfXnPMvg'),
                     ],
                   ),
                   Row(
                     children: [
-                      LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
-                      LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                     ],
                   ),
                 ],
               ),
             );
-
           }
         });
   }
 
   printUrl() async {
-    try{
-      var ref = FirebaseStorage.instance.ref().child('uploads/$email/fotoDePerfil');
-     String url = (await ref.getDownloadURL()).toString();
-     print("$url");
-      if(url != ''){
+    try {
+      var ref =
+          FirebaseStorage.instance.ref().child('uploads/$email/fotoDePerfil');
+      String url = (await ref.getDownloadURL()).toString();
+      print("$url");
+      if (url != '') {
         setState(() {
           path = url;
         });
-      }else{
+      } else {
         print("Deu bosta");
         setState(() {
-          path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+          path =
+              'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
         });
       }
-    } on Exception catch (e){
+    } on Exception catch (e) {
       setState(() {
-          path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
-        });
+        path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
+      });
       print("Deu merda");
     }
   }

@@ -40,6 +40,9 @@ class _LivrosUIState extends State<LivrosUI> {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
             email = data['userEmail'];
+            if (path == '') {
+              printUrl();
+            }
             return Padding(
               padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width / 15,
