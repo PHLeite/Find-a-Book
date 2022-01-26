@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:url_launcher/url_launcher.dart'
 import 'package:find_a_book/pages/perfilView/perfilView.dart';
 import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PagLivro extends StatefulWidget {
   final String livro;

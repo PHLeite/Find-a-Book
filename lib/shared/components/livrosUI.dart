@@ -16,7 +16,7 @@ class LivrosUI extends StatefulWidget {
 class _LivrosUIState extends State<LivrosUI> {
   String? email = '';
   CollectionReference books = FirebaseFirestore.instance.collection('books');
-  String path = '';
+  String path = 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,10 @@ class _LivrosUIState extends State<LivrosUI> {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
             email = data['userEmail'];
-            if (path == '') {
+            if (path == 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg') {
               printUrl();
             }
+            
             return Padding(
               padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width / 15,
@@ -90,17 +91,18 @@ class _LivrosUIState extends State<LivrosUI> {
           .child('uploads/$email/books/${widget.livro}');
       String url = (await ref.getDownloadURL()).toString();
       print("$url");
-      if (url != '') {
+      print("$email, ${widget.livro}");
+      //if (url != ''){
+      //setState(() {
         path = url;
-      } else {
-        print("Deu bosta");
-        path = 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg';
+      //});
+    //}
       }
-    } on Exception catch (e) {
-      setState(() {
-        path =
-            'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg';
-      });
+    on Exception catch (e) {
+       setState(() {
+          path =
+              'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg';
+        });
       print("Deu merda");
     }
   }
