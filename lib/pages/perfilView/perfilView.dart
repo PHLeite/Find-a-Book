@@ -2,13 +2,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PerfilView extends StatefulWidget {
-  const PerfilView({Key? key}) : super(key: key);
+  final String email;
+  const PerfilView({Key? key, required this.email}) : super(key: key);
 
   @override
   _PerfilViewState createState() => _PerfilViewState();
@@ -16,13 +16,13 @@ class PerfilView extends StatefulWidget {
 
 class _PerfilViewState extends State<PerfilView> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  String? email = FirebaseAuth.instance.currentUser!.email;
+  
   String path = '';
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-        future: users.doc(email).get(),
+        future: users.doc(widget.email).get(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -202,7 +202,7 @@ class _PerfilViewState extends State<PerfilView> {
 
   printUrl() async {
     try{
-      var ref = FirebaseStorage.instance.ref().child('uploads/$email/fotoDePerfil');
+      var ref = FirebaseStorage.instance.ref().child('uploads/$widget.email/fotoDePerfil');
      String url = (await ref.getDownloadURL()).toString();
      print("$url");
       if(url != ''){

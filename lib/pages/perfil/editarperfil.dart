@@ -240,7 +240,7 @@ class _EditarState extends State<Editar> {
     );
   }
   Future escolherFoto() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false,  type: FileType.image);
     if (result == null) return;
     final path = result.files.single.path!;
 

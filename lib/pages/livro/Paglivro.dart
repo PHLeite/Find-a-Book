@@ -174,7 +174,7 @@ class _PagLivroState extends State<PagLivro> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => PerfilView()
+                            builder: (context) => PerfilView(email: data['userEmail'],)
                           ));
                         },
                         child: Container(
