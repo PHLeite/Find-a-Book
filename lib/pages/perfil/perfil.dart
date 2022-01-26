@@ -18,8 +18,10 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference books = FirebaseFirestore.instance.collection('books');
   String? email = FirebaseAuth.instance.currentUser!.email;
   String path = '';
+  Map<int, String> vetor = Map();
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +206,8 @@ class _PerfilState extends State<Perfil> {
                       ),
                     ),
                   ),
-                  Row(
+                  buildMeusLivros()
+                  /* Row(
                     children: [
                       LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                       LivrosUI(livro: 'VcVaEY4FpybWsfXnPMvg'),
@@ -215,7 +218,7 @@ class _PerfilState extends State<Perfil> {
                       LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                       LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
                     ],
-                  ),
+                  ), */
                 ],
               ),
             );
@@ -245,6 +248,25 @@ class _PerfilState extends State<Perfil> {
         path = 'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed.png';
       });
       print("Deu merda");
+    }
+  }
+
+  carregarMeusLivros() async {
+    await books
+        .where('userEmail', isEqualTo: email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        for (int i = 0; i < querySnapshot.docs.length; i++) {
+          vetor[i] = doc.id;
+        }
+      });
+    });
+  }
+
+  buildMeusLivros() {
+    for (int i = 0; i > 20; i++) {
+      LivrosUI(livro: vetor[i]!);
     }
   }
 }
