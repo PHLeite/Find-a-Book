@@ -23,6 +23,7 @@ class _RegistreState extends State<Registre> {
   final email = TextEditingController();
   final nome = TextEditingController();
   final local = TextEditingController();
+  final cool = 'ok';
   File? file;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   User? user = FirebaseAuth.instance.currentUser;
@@ -42,7 +43,9 @@ class _RegistreState extends State<Registre> {
         'email': email.text,
         'local': local.text,
       });
-    } on AuthExeption catch (e) {
+    } 
+    on AuthExeption catch (e) {
+      
       setState(() => loading = false);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -332,4 +335,5 @@ class _RegistreState extends State<Registre> {
         .putFile(file!);
     print("DEU CERTO POW");
   }
+  
 }

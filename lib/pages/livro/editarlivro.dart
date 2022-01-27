@@ -391,7 +391,7 @@ class _EditarLivroState extends State<EditarLivro> {
                             Navigator.of(context).pop();          
                         },
                         child: Text(
-                          'Cadastrar',
+                          'Editar',
                           style: TextStyle(
                               fontSize: 23,
                               fontWeight: FontWeight.w800,
@@ -408,6 +408,32 @@ class _EditarLivroState extends State<EditarLivro> {
                     ),
                   ),
                 ),
+                Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 15, left: 15, right: 15),
+                      child: OutlinedButton(
+                        onPressed: (){
+                          books.doc(widget.livro).delete();
+                          Navigator.of(context).pop();  
+                        },
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.red[200],
+                            shape: StadiumBorder(),
+                            fixedSize: Size(MediaQuery.of(context).size.width,
+                                MediaQuery.of(context).size.height / 20)),
+                        child: Center(
+                          child: Text(
+                            'Excluir',
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
