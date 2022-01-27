@@ -49,35 +49,27 @@ class _LivrosUIState extends State<LivrosUI> {
                   left: MediaQuery.of(context).size.width / 15,
                   bottom: MediaQuery.of(context).size.height / 40,
                   top: 0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PagLivro(livro: widget.livro)));
-                },
-                child: Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 3,
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(path), fit: BoxFit.cover)),
+              child: Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(path), fit: BoxFit.cover)),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Text(
+                      data['valor'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
+                          color: Colors.black),
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Text(
-                        data['valor'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 17,
-                            color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           }

@@ -1,4 +1,6 @@
 import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/pages/livro/Paglivro.dart';
+import 'package:find_a_book/pages/livro/editarlivro.dart';
 import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
 import 'package:flutter/material.dart';
@@ -96,26 +98,114 @@ class _HomeState extends State<Home> {
                 children: [
                   Row(
                     children: [
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditarLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      
+                     
                     ],
                   ),
-                  Row(
+                   Row(
                     children: [
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      
+                     
                     ],
                   ),
-                  Row(
+                   Row(
                     children: [
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      
+                     
                     ],
                   ),
-                  Row(
+                   Row(
                     children: [
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
-                      LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      ),
+                      
+                     
                     ],
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/pages/livro/editarlivro.dart';
 import 'package:find_a_book/pages/perfil/editarperfil.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
@@ -266,7 +267,18 @@ class _PerfilState extends State<Perfil> {
 
   buildMeusLivros() {
     for (int i = 0; i > 20; i++) {
-      LivrosUI(livro: vetor[i]!);
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditarLivro(livro: vetor[i]!)
+            )
+          );
+        },
+        child:LivrosUI(livro: vetor[i]!),
+      );
+
     }
   }
 }
