@@ -85,7 +85,7 @@ class _PagLivroState extends State<PagLivro> {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: 150, right: 150, top: 15, bottom: 15),
-                      child: Categorie(Categoria: data['categoria']),
+                      child: Categorie(categoria: data['categoria']),
                     ),
                   ),
                   Padding(
