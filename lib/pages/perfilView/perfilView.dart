@@ -179,17 +179,17 @@ class _PerfilViewState extends State<PerfilView> {
                   Row(
                     children: [
                       LivrosUI(
-                         livro: '5iyGvcedIplSbnD506Ld'),
+                         livro: 'VcVaEY4FpybWsfXnPMvg'),
                       LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
+                          livro: 'VcVaEY4FpybWsfXnPMvg'),
                     ],
                   ),
                   Row(
                     children: [
                       LivrosUI(
-                         livro: '5iyGvcedIplSbnD506Ld'),
+                         livro: 'VcVaEY4FpybWsfXnPMvg'),
                       LivrosUI(
-                          livro: '5iyGvcedIplSbnD506Ld'),
+                          livro: 'VcVaEY4FpybWsfXnPMvg'),
                     ],
                   ),
                 ],
@@ -202,7 +202,7 @@ class _PerfilViewState extends State<PerfilView> {
 
   printUrl() async {
     try{
-      var ref = FirebaseStorage.instance.ref().child('uploads/$widget.email/fotoDePerfil');
+      var ref = FirebaseStorage.instance.ref().child('uploads/${widget.email}/fotoDePerfil');
      String url = (await ref.getDownloadURL()).toString();
      print("$url");
       if(url != ''){
