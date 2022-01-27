@@ -219,7 +219,7 @@ class _PerfilState extends State<Perfil> {
                       LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                     ],
-                  ), 
+                  ),
                 ],
               ),
             );
@@ -270,15 +270,12 @@ class _PerfilState extends State<Perfil> {
       GestureDetector(
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EditarLivro(livro: vetor[i]!)
-            )
-          );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EditarLivro(livro: vetor[i]!)));
         },
-        child:LivrosUI(livro: vetor[i]!),
+        child: LivrosUI(livro: vetor[i]!),
       );
-
     }
   }
 }

@@ -36,6 +36,7 @@ class AuthService extends ChangeNotifier {
   registrar(String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
+      logout();
       _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {

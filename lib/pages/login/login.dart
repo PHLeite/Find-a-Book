@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
                     painter: SetaRoxa(),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Registre()));
                       },
                       child: Text(
