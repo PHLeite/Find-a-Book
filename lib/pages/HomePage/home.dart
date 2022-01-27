@@ -103,50 +103,22 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => EditarLivro(livro: '5iyGvcedIplSbnD506Ld')
+                              builder: (context) => EditarLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
                             )
                           );
                         },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ),
                       GestureDetector(  
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
                             )
                           );
                         },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
-                      ),
-                      
-                     
-                    ],
-                  ),
-                   Row(
-                    children: [
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
-                      ),
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ),
                       
                      
@@ -159,22 +131,22 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
                             )
                           );
                         },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ),
                       GestureDetector(  
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
                             )
                           );
                         },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ),
                       
                      
@@ -187,22 +159,50 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
                             )
                           );
                         },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ),
                       GestureDetector(  
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: '5iyGvcedIplSbnD506Ld')
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
                             )
                           );
                         },
-                      child: LivrosUI(livro: '5iyGvcedIplSbnD506Ld'),
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+                      ),
+                      
+                     
+                    ],
+                  ),
+                   Row(
+                    children: [
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+                      ),
+                      GestureDetector(  
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+                            )
+                          );
+                        },
+                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ),
                       
                      
