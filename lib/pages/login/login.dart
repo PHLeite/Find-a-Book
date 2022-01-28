@@ -62,9 +62,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
                   alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.width / 3,
-                  color: Cores.laranja,
+                  child: Image.asset('imagens/logomac.png',),
                 ),
               ),
               Container(
