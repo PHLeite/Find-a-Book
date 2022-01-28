@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/pages/home/index.dart';
 import 'package:find_a_book/pages/login/login.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,9 +44,11 @@ class _RegistreState extends State<Registre> {
         'email': email.text,
         'local': local.text,
       });
-    } 
-    on AuthExeption catch (e) {
-      
+      if (user != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage()));
+      }
+    } on AuthExeption catch (e) {
       setState(() => loading = false);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -335,5 +338,4 @@ class _RegistreState extends State<Registre> {
         .putFile(file!);
     print("DEU CERTO POW");
   }
-  
 }
