@@ -51,176 +51,180 @@ class _PerfilState extends State<Perfil> {
             }
             return Scaffold(
               backgroundColor: Colors.white,
-              body: ListView(
-                children: [
-                  Container(
-                    child: Center(
-                      child: Container(
-                        width: MediaQuery.of(context).size.height / 5,
-                        height: MediaQuery.of(context).size.height / 5,
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: CircleAvatar(
-                            radius: 100,
-                            backgroundImage: NetworkImage(path),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Container(
-                      child: Text(
-                        data['nome'],
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 28),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20, right: 15, left: 15, bottom: 5),
-                          child: Container(
-                            child: Icon(
-                              Icons.location_on,
-                              color: Cores.cinza,
+              body: RefreshIndicator(
+                onRefresh: _refresh,
+                color: Cores.roxo,
+                child: ListView(
+                  children: [
+                    Container(
+                      child: Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.height / 5,
+                          height: MediaQuery.of(context).size.height / 5,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: CircleAvatar(
+                              radius: 100,
+                              backgroundImage: NetworkImage(path),
                             ),
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Container(
-                            child: Text(
-                              data['local'],
-                              style:
-                                  TextStyle(color: Cores.cinza, fontSize: 13),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
+                    ),
+                    Center(
                       child: Container(
                         child: Text(
-                          data['bio'],
-                          style: TextStyle(fontSize: 14),
+                          data['nome'],
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 28),
                         ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 15, left: 15, right: 15),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Cores.azul,
-                          shape: StadiumBorder(),
-                          side: BorderSide(
-                            color: Colors.white,
-                          ),
-                          fixedSize: Size(MediaQuery.of(context).size.width,
-                              MediaQuery.of(context).size.height / 20),
-                        ),
-                        onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Editar())),
-                        child: Center(
-                          child: Text(
-                            'Editar Perfil',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 15, left: 15, right: 15),
-                      child: OutlinedButton(
-                        onPressed: () => context.read<AuthService>().logout(),
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.red[200],
-                            shape: StadiumBorder(),
-                            fixedSize: Size(MediaQuery.of(context).size.width,
-                                MediaQuery.of(context).size.height / 20)),
-                        child: Center(
-                          child: Text(
-                            'Sair',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                            child: Column(
-                          children: [
-                            Text(
-                              '3',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                            Text(
-                              'A venda',
-                              style: TextStyle(
-                                fontSize: 14,
+                    Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 20, right: 15, left: 15, bottom: 5),
+                            child: Container(
+                              child: Icon(
+                                Icons.location_on,
+                                color: Cores.cinza,
                               ),
-                            )
-                          ],
-                        ))),
-                  ),
-                  Center(
-                    child: Padding(
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Container(
+                              child: Text(
+                                data['local'],
+                                style:
+                                    TextStyle(color: Cores.cinza, fontSize: 13),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        child: Container(
+                          child: Text(
+                            data['bio'],
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 15, left: 15, right: 15),
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Cores.azul,
+                            shape: StadiumBorder(),
+                            side: BorderSide(
+                              color: Colors.white,
+                            ),
+                            fixedSize: Size(MediaQuery.of(context).size.width,
+                                MediaQuery.of(context).size.height / 20),
+                          ),
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => Editar())),
+                          child: Center(
+                            child: Text(
+                              'Editar Perfil',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 15, left: 15, right: 15),
+                        child: OutlinedButton(
+                          onPressed: () => context.read<AuthService>().logout(),
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.red[200],
+                              shape: StadiumBorder(),
+                              fixedSize: Size(MediaQuery.of(context).size.width,
+                                  MediaQuery.of(context).size.height / 20)),
+                          child: Center(
+                            child: Text(
+                              'Sair',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: Container(
-                        child: Text(
-                          'LIVROS',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Cores.roxo,
-                              fontWeight: FontWeight.w700),
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                              child: Column(
+                            children: [
+                              Text(
+                                '3',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                              Text(
+                                'A venda',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              )
+                            ],
+                          ))),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 15),
+                        child: Container(
+                          child: Text(
+                            'LIVROS',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Cores.roxo,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  //buildMeusLivros()
-                  Row(
-                    children: [
-                      LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      LivrosUI(livro: 'VcVaEY4FpybWsfXnPMvg'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                    ],
-                  ),
-                ],
+                    //buildMeusLivros()
+                    Row(
+                      children: [
+                        LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+                        LivrosUI(livro: 'VcVaEY4FpybWsfXnPMvg'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+                        LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
           }
@@ -277,5 +281,10 @@ class _PerfilState extends State<Perfil> {
         child: LivrosUI(livro: vetor[i]!),
       );
     }
+  }
+
+  Future<void> _refresh() {
+    setState((){});
+    return Future.delayed(Duration(seconds: 2));
   }
 }

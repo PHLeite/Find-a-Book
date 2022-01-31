@@ -34,7 +34,7 @@ class _ConfirmadoState extends State<Confirmado> {
                       size: 30,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop() ;
                     },
                   )
                 ),
