@@ -83,10 +83,21 @@ class _LivrosUIState extends State<LivrosUI> {
                     Container(
                       width: MediaQuery.of(context).size.width / 3,
                       child: Text(
-                        data['valor'],
+                        data['nome'],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            color: Colors.black
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Text(
+                        data['valor'],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                             fontSize: 17,
                             color: Colors.black),
                       ),

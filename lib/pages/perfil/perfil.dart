@@ -210,41 +210,46 @@ class _PerfilState extends State<Perfil> {
                         ),
                       ),
                     ),
-                    // FutureBuilder(
-                    //     future:
-                    //         books.where('userEmail', isEqualTo: email).get(),
-                    //     builder: (BuildContext context, snapshot) {
-                    //       if (snapshot.hasError) {
-                    //         return Text("Something went wrong");
-                    //       }
+                    FutureBuilder(
+                        future:
+                            books.where('userEmail', isEqualTo: email).get(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
 
-                    //       if (snapshot.hasData) {
-                    //         return Text("Document does not exist");
-                    //       }
-                    //       if (snapshot.connectionState ==
-                    //           ConnectionState.waiting) {
-                    //         return Center(
-                    //             child: CircularProgressIndicator(
-                    //           color: Cores.roxo,
-                    //         ));
-                    //       }
-                    //       if (true) {
-                    //         Map<int, dynamic> data =
-                    //             snapshot.data as Map<int, dynamic>;
-                    //         Row(
-                    //           children: [
-                    //             LivrosUI(livro: data[1]),
-                    //             LivrosUI(livro: data[2]),
-                    //           ],
-                    //         );
-                    //         Row(
-                    //           children: [
-                    //             LivrosUI(livro: data[3]),
-                    //             LivrosUI(livro: data[4]),
-                    //           ],
-                    //         );
-                    //       }
-                    //     }),
+                          if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
+                            return Text("Document does not exist");
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: Cores.roxo,
+                            ));
+                          }
+                          else{
+                           List<String> data =
+                                    snapshot.data!.docs.map((e) => e.id).toList();
+                            return Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    LivrosUI(livro: data[1], pag: 'perfil',),
+                                    LivrosUI(livro: data[2], pag: 'perfil'),
+                                  ],
+                                ),
+                              
+                            Row(
+                              children: [
+                                LivrosUI(livro: data[3], pag: 'perfil'),
+                                LivrosUI(livro: data[4], pag: 'perfil'),
+                              ],
+                            ),
+                            ],
+                            );
+                          }
+                        }),
                     /* Row(
                       children: [
                         LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
