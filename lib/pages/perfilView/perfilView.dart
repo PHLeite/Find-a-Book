@@ -179,17 +179,17 @@ class _PerfilViewState extends State<PerfilView> {
                   Row(
                     children: [
                       LivrosUI(
-                         livro: 'VcVaEY4FpybWsfXnPMvg'),
+                         livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
                       LivrosUI(
-                          livro: 'VcVaEY4FpybWsfXnPMvg'),
+                          livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
                     ],
                   ),
                   Row(
                     children: [
                       LivrosUI(
-                         livro: 'VcVaEY4FpybWsfXnPMvg'),
+                         livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
                       LivrosUI(
-                          livro: 'VcVaEY4FpybWsfXnPMvg'),
+                          livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
                     ],
                   ),
                 ],
