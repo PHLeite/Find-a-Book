@@ -44,12 +44,7 @@ class _RegistreState extends State<Registre> {
         'email': email.text,
         'local': local.text,
       });
-      if (user != null) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage()));
-      }
     } on AuthExeption catch (e) {
-      setState(() => loading = false);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
     }

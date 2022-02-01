@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
               } else if (snapshot.hasData) {
                 return AuthCheck();
               } else {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Scaffold(
+                  backgroundColor: Colors.white,
                 );
               }
             }));

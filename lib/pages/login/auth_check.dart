@@ -21,7 +21,10 @@ class _AuthCheckState extends State<AuthCheck> {
       return loading();
     } else if (auth.usuario == null) {
       return Login();
-    } else{
+    } else if (auth.isRegistrado) {
+      Navigator.pop(context);
+      return HomePage();
+    } else {
       return HomePage();
     }
   }

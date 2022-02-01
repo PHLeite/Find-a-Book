@@ -61,10 +61,12 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width/2,
-                  height: MediaQuery.of(context).size.height/4,
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: MediaQuery.of(context).size.height / 4,
                   alignment: Alignment.center,
-                  child: Image.asset('assets/images/F.png',),
+                  child: Image.asset(
+                    'assets/images/F.png',
+                  ),
                 ),
               ),
               Container(
