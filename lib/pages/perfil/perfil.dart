@@ -139,7 +139,8 @@ class _PerfilState extends State<Perfil> {
                                 MediaQuery.of(context).size.height / 20),
                           ),
                           onPressed: () => Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => Editar())),
+                              MaterialPageRoute(
+                                  builder: (context) => Editar())),
                           child: Center(
                             child: Text(
                               'Editar Perfil',
@@ -210,8 +211,42 @@ class _PerfilState extends State<Perfil> {
                         ),
                       ),
                     ),
-                    //buildMeusLivros()
-                    Row(
+                    FutureBuilder(
+                        future:
+                            books.where('userEmail', isEqualTo: email).get(),
+                        builder: (BuildContext context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
+
+                          if (snapshot.hasData) {
+                            return Text("Document does not exist");
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: Cores.roxo,
+                            ));
+                          }
+                          if (true) {
+                            Map<int, dynamic> data =
+                                snapshot.data as Map<int, dynamic>;
+                            Row(
+                              children: [
+                                LivrosUI(livro: data[1]),
+                                LivrosUI(livro: data[2]),
+                              ],
+                            );
+                            Row(
+                              children: [
+                                LivrosUI(livro: data[3]),
+                                LivrosUI(livro: data[4]),
+                              ],
+                            );
+                          }
+                        }),
+                    /* Row(
                       children: [
                         LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                         LivrosUI(livro: 'VcVaEY4FpybWsfXnPMvg'),
@@ -222,7 +257,7 @@ class _PerfilState extends State<Perfil> {
                         LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                         LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
                       ],
-                    ),
+                    ), */
                   ],
                 ),
               ),
@@ -284,7 +319,7 @@ class _PerfilState extends State<Perfil> {
   }
 
   Future<void> _refresh() {
-    setState((){});
+    setState(() {});
     return Future.delayed(Duration(seconds: 2));
   }
 }
