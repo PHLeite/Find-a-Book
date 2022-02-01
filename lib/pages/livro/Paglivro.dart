@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PagLivro extends StatefulWidget {
-  final String livro;
+  final livro;
   const PagLivro({Key? key, required this.livro}) : super(key: key);
 
   @override

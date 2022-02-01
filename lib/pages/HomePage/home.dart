@@ -1,6 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/livro/Paglivro.dart';
-import 'package:find_a_book/pages/livro/editarlivro.dart';
 import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
 import 'package:flutter/material.dart';
@@ -92,124 +91,146 @@ class _HomeState extends State<Home> {
         Expanded(
           child: ScrollConfiguration(
             behavior: MyBehavior(),
-            child: ListView(
-              scrollDirection: Axis.vertical,
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance.collection('books').snapshots(),
+              builder: (context,  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
+                if(snapshot.connectionState == ConnectionState.waiting){
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: Cores.roxo,
+                    )
+                  );
+                }
+
+                return ListView.builder(
+                  itemCount:  snapshot.data!.docs.length,
+                  //com isso da pra fazer o tanto de livro q tem lá no perfil!
+                  itemBuilder: (context, index) => LivrosUI(
+                    //livro: snapshot.data!.docs[index].data(),
+                    livro: 'ms8b7CELRQzpFS2BjOAK', 
+                    pag:'home'
+                  )
+                );
+              },
+            ),
+            // child: ListView(
+            //   scrollDirection: Axis.vertical,
               
-                children: [
-                  Row(
-                    children: [
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditarLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
+            //     children: [
+            //       Row(
+            //         children: [
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => EditarLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
                       
                      
-                    ],
-                  ),
-                   Row(
-                    children: [
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
+            //         ],
+            //       ),
+            //        Row(
+            //         children: [
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
                       
                      
-                    ],
-                  ),
-                   Row(
-                    children: [
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
+            //         ],
+            //       ),
+            //        Row(
+            //         children: [
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
                       
                      
-                    ],
-                  ),
-                   Row(
-                    children: [
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
-                      GestureDetector(  
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-                            )
-                          );
-                        },
-                      child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-                      ),
+            //         ],
+            //       ),
+            //        Row(
+            //         children: [
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
+            //           GestureDetector(  
+            //             onTap: () {
+            //               Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+            //                 )
+            //               );
+            //             },
+            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
+            //           ),
                       
                      
-                    ],
-                  ),
-                ],
-              ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
           ),
         ),
       ],

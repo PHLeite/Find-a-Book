@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/livro/editarlivro.dart';
 import 'package:find_a_book/pages/perfil/editarperfil.dart';
 import 'package:find_a_book/services/auth.service.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
@@ -211,41 +210,41 @@ class _PerfilState extends State<Perfil> {
                         ),
                       ),
                     ),
-                    FutureBuilder(
-                        future:
-                            books.where('userEmail', isEqualTo: email).get(),
-                        builder: (BuildContext context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text("Something went wrong");
-                          }
+                    // FutureBuilder(
+                    //     future:
+                    //         books.where('userEmail', isEqualTo: email).get(),
+                    //     builder: (BuildContext context, snapshot) {
+                    //       if (snapshot.hasError) {
+                    //         return Text("Something went wrong");
+                    //       }
 
-                          if (snapshot.hasData) {
-                            return Text("Document does not exist");
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(
-                                child: CircularProgressIndicator(
-                              color: Cores.roxo,
-                            ));
-                          }
-                          if (true) {
-                            Map<int, dynamic> data =
-                                snapshot.data as Map<int, dynamic>;
-                            Row(
-                              children: [
-                                LivrosUI(livro: data[1]),
-                                LivrosUI(livro: data[2]),
-                              ],
-                            );
-                            Row(
-                              children: [
-                                LivrosUI(livro: data[3]),
-                                LivrosUI(livro: data[4]),
-                              ],
-                            );
-                          }
-                        }),
+                    //       if (snapshot.hasData) {
+                    //         return Text("Document does not exist");
+                    //       }
+                    //       if (snapshot.connectionState ==
+                    //           ConnectionState.waiting) {
+                    //         return Center(
+                    //             child: CircularProgressIndicator(
+                    //           color: Cores.roxo,
+                    //         ));
+                    //       }
+                    //       if (true) {
+                    //         Map<int, dynamic> data =
+                    //             snapshot.data as Map<int, dynamic>;
+                    //         Row(
+                    //           children: [
+                    //             LivrosUI(livro: data[1]),
+                    //             LivrosUI(livro: data[2]),
+                    //           ],
+                    //         );
+                    //         Row(
+                    //           children: [
+                    //             LivrosUI(livro: data[3]),
+                    //             LivrosUI(livro: data[4]),
+                    //           ],
+                    //         );
+                    //       }
+                    //     }),
                     /* Row(
                       children: [
                         LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
@@ -306,15 +305,7 @@ class _PerfilState extends State<Perfil> {
 
   buildMeusLivros() {
     for (int i = 0; i > 20; i++) {
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => EditarLivro(livro: vetor[i]!)));
-        },
-        child: LivrosUI(livro: vetor[i]!),
-      );
+       LivrosUI(livro: vetor[i]!, pag: 'perfil');
     }
   }
 
