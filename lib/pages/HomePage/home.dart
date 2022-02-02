@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/HomePage/search.dart';
@@ -80,6 +78,7 @@ class _HomeState extends State<Home> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
+                  
                 Categorie(categoria: "Ficção"),
                 Categorie(categoria: "Romance"),
                 Categorie(categoria: "Biografia"),
@@ -92,6 +91,7 @@ class _HomeState extends State<Home> {
                 Categorie(categoria: "Auto Ajuda"),
                 Categorie(categoria: "Religiosos"),
                 Categorie(categoria: "Terror"),
+                
                 ],
               ),
             ),
@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                               }
 
                               if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
-                                return Text("Document does not exist");
+                                return Text("Não existem livros cadastrados");
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
@@ -148,159 +148,6 @@ class _HomeState extends State<Home> {
                             }),
               ],
             ),
-            // child: StreamBuilder(
-            //   stream: FirebaseFirestore.instance.collection('books').snapshots(),
-            //   builder: (context,  AsyncSnapshot<QuerySnapshot> snapshot){
-            //     if(snapshot.connectionState == ConnectionState.waiting){
-            //       return Center(
-            //         child: CircularProgressIndicator(
-            //           color: Cores.roxo,
-            //         )
-            //       );
-            //     }
-
-            //     return ListView.builder(
-            //       itemCount:  snapshot.data!.docs.length,
-            //       //com isso da pra fazer o tanto de livro q tem lá no perfil!
-            //       itemBuilder: (context, index) => LivrosUI(
-            //         livro: snapshot.data!.docs.forEach((doc) { doc.id;})[index].data(),
-            //         //livro: 'ms8b7CELRQzpFS2BjOAK', 
-            //         pag:'home'
-            //         /* QuerySnapshot querySnapshot = await _collectionRef   
-            //                       .limit(1)
-            //                       .orderBy('date')                                                                    
-            //                       .getDocuments();
-            //               var list = querySnapshot.documents;
-            //               querySnapshot.documents[0].documentID
-            //               querySnapshot.documents.map((document) { 
-            //                   print('Document : $document'); // not printing anything.
-            //                 });
-
-            //               if(list.length > 0) {
-            //                 print('ID : ${list[0].documentID}'); // not working
-            //               } */
-            //       )
-            //     );
-            //   },
-            // ),
-            // child: ListView(
-            //   scrollDirection: Axis.vertical,
-              
-            //     children: [
-            //       Row(
-            //         children: [
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => EditarLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-                      
-                     
-            //         ],
-            //       ),
-            //        Row(
-            //         children: [
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-                      
-                     
-            //         ],
-            //       ),
-            //        Row(
-            //         children: [
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-                      
-                     
-            //         ],
-            //       ),
-            //        Row(
-            //         children: [
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-            //           GestureDetector(  
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
-            //                 )
-            //               );
-            //             },
-            //           child: LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
-            //           ),
-                      
-                     
-            //         ],
-            //       ),
-            //     ],
-            //   ),
           ),
         ),
       ],

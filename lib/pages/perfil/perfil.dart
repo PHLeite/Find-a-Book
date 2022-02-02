@@ -34,7 +34,7 @@ class _PerfilState extends State<Perfil> {
           }
 
           if (snapshot.hasData && !snapshot.data!.exists) {
-            return Text("Document does not exist");
+            return Text("Você não cadastrou nenhum livro!");
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -229,8 +229,7 @@ class _PerfilState extends State<Perfil> {
                             ));
                           }
                           else{
-                           List<String> data =
-                                    snapshot.data!.docs.map((e) => e.id).toList();
+                           List<String> data = snapshot.data!.docs.map((e) => e.id).toList();
                             return Column(
                               children: [
                                 Row(

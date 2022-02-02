@@ -52,7 +52,7 @@ class _LivrosUIState extends State<LivrosUI> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditarLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+                        builder: (context) => EditarLivro(livro: widget.livro)
                       )
                     );
                   }
@@ -60,7 +60,7 @@ class _LivrosUIState extends State<LivrosUI> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PagLivro(livro: 'ms8b7CELRQzpFS2BjOAK')
+                        builder: (context) => PagLivro(livro: widget.livro)
                       )
                     );
                   }

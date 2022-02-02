@@ -16,7 +16,7 @@ class PerfilView extends StatefulWidget {
 
 class _PerfilViewState extends State<PerfilView> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  
+  CollectionReference books = FirebaseFirestore.instance.collection('books');
   String path = '';
 
   @override
@@ -176,22 +176,46 @@ class _PerfilViewState extends State<PerfilView> {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      LivrosUI(
-                         livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
-                      LivrosUI(
-                          livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      LivrosUI(
-                         livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
-                      LivrosUI(
-                          livro: 'VcVaEY4FpybWsfXnPMvg', pag: 'home'),
-                    ],
-                  ),
+                  FutureBuilder(
+                        future:
+                            books.where('userEmail', isEqualTo: data['userEmail']).get(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
+
+                          if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
+                            return Text("Este usuário não possui nenhum livro cadastrado!");
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: Cores.roxo,
+                            ));
+                          }
+                          else{
+                           List<String> data =
+                                    snapshot.data!.docs.map((e) => e.id).toList();
+                            return Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    LivrosUI(livro: data[1], pag: 'perfil',),
+                                    LivrosUI(livro: data[2], pag: 'perfil'),
+                                  ],
+                                ),
+                              
+                            Row(
+                              children: [
+                                LivrosUI(livro: data[3], pag: 'perfil'),
+                                LivrosUI(livro: data[4], pag: 'perfil'),
+                              ],
+                            ),
+                            ],
+                            );
+                          }
+                        }),
                 ],
               ),
             );

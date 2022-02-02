@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
+import 'package:find_a_book/pages/HomePage/categorias.dart';
 import 'package:flutter/material.dart';
 
 class Categorie extends StatefulWidget {
@@ -16,7 +17,12 @@ class _CategorieState extends State<Categorie> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        escolherCategoria();
+        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Categorias(categoria: widget.categoria,)
+                      )
+                    );
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 3.8,
@@ -44,15 +50,4 @@ class _CategorieState extends State<Categorie> {
     );
   }
 
-  escolherCategoria() async {
-    await FirebaseFirestore.instance
-        .collection('books')
-        .where('categoria', isEqualTo: widget.categoria)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print("${doc.id}");
-      });
-    });
-  }
 }

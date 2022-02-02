@@ -365,6 +365,12 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
                             registrarLivro();
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => Confirmado()));
+                            nome.clear();
+                            autor.clear();
+                            editora.clear();
+                            link.clear();
+                            descricao.clear();
+                            valor.clear();
                           }
                         },
                         child: Text(
