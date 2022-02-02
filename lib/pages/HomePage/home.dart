@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
                   cursorColor: Colors.white,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search, color: Colors.white,),
-                     suffixIcon: IconButton(onPressed: () {
+                    suffixIcon:IconButton(onPressed: () {
                       searchController.clear();
                       setState(() {
                         camp = 'tudo';
@@ -67,6 +67,14 @@ class _HomeState extends State<Home> {
                         isPesquisa = false;
                       });
                     }, icon: Icon(Icons.cancel_outlined, color: Colors.white)),
+                     /* suffixIcon:searchController.text.length>0 ? new IconButton(onPressed: () {
+                      searchController.clear();
+                      setState(() {
+                        camp = 'tudo';
+                        query = "";
+                        isPesquisa = false;
+                      });
+                    }, icon: Icon(Icons.cancel_outlined, color: Colors.white)):new Container(height: 0.0,width: 0.0,), */
                     fillColor: Cores.verdeAgua,
                     filled: true,
                     focusColor: Cores.verdeAgua,
@@ -78,8 +86,9 @@ class _HomeState extends State<Home> {
                     hintStyle: TextStyle(color: Colors.white54)
                   ),
                   onFieldSubmitted: (String pesquisa){
+                    
                     setState(() {
-                      camp = 'nome';
+                      camp = 'caseSearch';
                       query = pesquisa;
                       isPesquisa = true;
                     });
@@ -132,7 +141,7 @@ class _HomeState extends State<Home> {
                             return Text("Something went wrong");
                           }
 
-                          if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
+                          if (snapshot.data!.docs.length == 0) {
                             return Text("Não existem livros cadastrados");
                           }
                           if (snapshot.connectionState ==
@@ -207,7 +216,8 @@ class _HomeState extends State<Home> {
   }
   Future<QuerySnapshot<Object?>> Query() async{
     if(isPesquisa == true){
-      return await books.where(camp, isGreaterThanOrEqualTo: query).get();
+      print(query);
+      return await books.where(camp, arrayContains: query).get();
     }else{
       return await books.where(camp, isEqualTo: query).get();
     } 
