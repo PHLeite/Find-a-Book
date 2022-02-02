@@ -57,6 +57,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
         'categoria': categoria,
         'estado': item,
         'valor': valor.text,
+        'tudo': ""
       }).then((value) => (documentID = value.id));
       uploadFoto();
     } on Exception catch (e) {

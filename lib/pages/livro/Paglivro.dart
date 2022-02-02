@@ -101,17 +101,7 @@ class _PagLivroState extends State<PagLivro> {
                       ),
                     ),
                   ),
-                  /* SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          Livro(photo: "assets/images/livro1.jpg"),
-                          Livro(photo: "assets/images/livro2.jpg"),
-                          Livro(photo: "assets/images/livro3.jpg"),
-                          Livro(photo: "assets/images/livro4.jpg"),
-                        ],
-                      ),
-                    ), */
+                
                   Center(
                     child: Container(
                       child: Text(

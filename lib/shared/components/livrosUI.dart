@@ -66,44 +66,38 @@ class _LivrosUIState extends State<LivrosUI> {
                   }
                 },
              
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 15,
-                    bottom: MediaQuery.of(context).size.height / 40,
-                    top: 0),
-                child: Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 3,
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(paths), fit: BoxFit.cover)),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Text(
-                        data['nome'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            color: Colors.black
-                        ),
+              child: Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(paths), fit: BoxFit.cover)),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Text(
+                      data['nome'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          color: Colors.black
                       ),
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Text(
-                        data['valor'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black),
-                      ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 3,
+                    child: Text(
+                      data['valor'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.black),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             );
           }

@@ -48,12 +48,10 @@ class _PerfilState extends State<Perfil> {
             if (path == '') {
               printUrl();
             }
-            return Scaffold(
-              backgroundColor: Colors.white,
-              body: RefreshIndicator(
+            return RefreshIndicator(
                 onRefresh: _refresh,
                 color: Cores.roxo,
-                child: ListView(
+                child: Column(
                   children: [
                     Container(
                       child: Center(
@@ -175,27 +173,7 @@ class _PerfilState extends State<Perfil> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 15),
-                      child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Center(
-                              child: Column(
-                            children: [
-                              Text(
-                                '3',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18),
-                              ),
-                              Text(
-                                'A venda',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              )
-                            ],
-                          ))),
-                    ),
+                  
                     Center(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 15),
@@ -210,45 +188,41 @@ class _PerfilState extends State<Perfil> {
                         ),
                       ),
                     ),
-                    FutureBuilder(
-                        future:
-                            books.where('userEmail', isEqualTo: email).get(),
-                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                          if (snapshot.hasError) {
-                            return Text("Something went wrong");
-                          }
-
-                          if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
-                            return Text("Document does not exist");
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(
-                                child: CircularProgressIndicator(
-                              color: Cores.roxo,
-                            ));
-                          }
-                          else{
-                           List<String> data = snapshot.data!.docs.map((e) => e.id).toList();
-                            return Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    LivrosUI(livro: data[1], pag: 'perfil',),
-                                    LivrosUI(livro: data[2], pag: 'perfil'),
-                                  ],
-                                ),
-                              
-                            Row(
-                              children: [
-                                LivrosUI(livro: data[3], pag: 'perfil'),
-                                LivrosUI(livro: data[4], pag: 'perfil'),
-                              ],
-                            ),
-                            ],
-                            );
-                          }
-                        }),
+                    Expanded(
+                      child: FutureBuilder(
+                          future: books.where('userEmail', isEqualTo: email).get(),
+                          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text("Something went wrong");
+                            }
+                    
+                            if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
+                              return Text("Não existem livros cadastrados");
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                color: Cores.roxo,
+                              ));
+                            }
+                            else{
+                              List<String> data = snapshot.data!.docs.map((e) => e.id).toList();
+                              return GridView.builder(
+                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 0.72,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10,
+                                  ),
+                                  itemCount: data.length,
+                                  itemBuilder: (BuildContext ctx, index) {
+                                    return LivrosUI(livro: data[index], pag: 'perfil');
+                                });
+                                
+                            }
+                          }),
+                    ),
                     /* Row(
                       children: [
                         LivrosUI(livro: 'ms8b7CELRQzpFS2BjOAK'),
@@ -263,8 +237,8 @@ class _PerfilState extends State<Perfil> {
                     ), */
                   ],
                 ),
-              ),
-            );
+              );
+            
           }
         });
   }
@@ -305,12 +279,6 @@ class _PerfilState extends State<Perfil> {
         }
       });
     });
-  }
-
-  buildMeusLivros() {
-    for (int i = 0; i > 20; i++) {
-       LivrosUI(livro: vetor[i]!, pag: 'perfil');
-    }
   }
 
   Future<void> _refresh() {

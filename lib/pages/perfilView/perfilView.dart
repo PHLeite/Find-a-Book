@@ -46,7 +46,7 @@ class _PerfilViewState extends State<PerfilView> {
             }
             return Scaffold(
               backgroundColor: Colors.white,
-              body: ListView(
+              body: Column(
                 children: [
                   Align(
               alignment: Alignment.topLeft,
@@ -140,28 +140,6 @@ class _PerfilViewState extends State<PerfilView> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Center(child: Column(children: [
-                        Text(
-                '3', 
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, 
-                    fontSize: 18
-                ),
-              ),
-              Text(
-                'A venda',
-                style: TextStyle(
-                    fontSize: 14,
-                ),
-              )
-                      ],))
-                    ),
-                  ),
-                  
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 15),
@@ -176,46 +154,41 @@ class _PerfilViewState extends State<PerfilView> {
                       ),
                     ),
                   ),
-                  FutureBuilder(
-                        future:
-                            books.where('userEmail', isEqualTo: data['userEmail']).get(),
-                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                          if (snapshot.hasError) {
-                            return Text("Something went wrong");
-                          }
-
-                          if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
-                            return Text("Este usuário não possui nenhum livro cadastrado!");
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Center(
-                                child: CircularProgressIndicator(
-                              color: Cores.roxo,
-                            ));
-                          }
-                          else{
-                           List<String> data =
-                                    snapshot.data!.docs.map((e) => e.id).toList();
-                            return Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    LivrosUI(livro: data[1], pag: 'perfil',),
-                                    LivrosUI(livro: data[2], pag: 'perfil'),
-                                  ],
-                                ),
-                              
-                            Row(
-                              children: [
-                                LivrosUI(livro: data[3], pag: 'perfil'),
-                                LivrosUI(livro: data[4], pag: 'perfil'),
-                              ],
-                            ),
-                            ],
-                            );
-                          }
-                        }),
+                  Expanded(
+                    child: FutureBuilder(
+                          future:
+                              books.where('userEmail', isEqualTo: data['userEmail']).get(),
+                          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                            if (snapshot.hasError) {
+                              return Text("Something went wrong");
+                            }
+                  
+                            if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
+                              return Text("Este usuário não possui nenhum livro cadastrado!");
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                color: Cores.roxo,
+                              ));
+                            }
+                            else{
+                             List<String> dataLi = snapshot.data!.docs.map((e) => e.id).toList();
+                                return GridView.builder(
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: 0.72,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                    ),
+                                    itemCount: data.length,
+                                    itemBuilder: (BuildContext ctx, index) {
+                                      return LivrosUI(livro: dataLi[index], pag: 'home');
+                                  });
+                            }
+                          }),
+                  ),
                 ],
               ),
             );

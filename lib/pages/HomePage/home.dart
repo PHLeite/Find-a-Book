@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
 import 'package:find_a_book/pages/HomePage/search.dart';
-import 'package:find_a_book/shared/components/categoriesUI.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +11,15 @@ class MyBehavior extends ScrollBehavior {
     return child;
   }
 }
+// class Categ{
+//   late final String categoria;
+
+//   Categ(this.categoria);
+
+//   setCategoria(String categs){
+//     categoria = categs;
+//   }
+// }
 class Home extends StatefulWidget {
   const Home({ Key? key }) : super(key: key);
 
@@ -20,7 +28,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final TextEditingController searchController = TextEditingController();
+  String query= "";
+  String camp = 'tudo';
+  bool isPesquisa = false;
   CollectionReference books = FirebaseFirestore.instance.collection('books');
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,40 +47,47 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         Container(height: MediaQuery.of(context).size.height/25,),
-        Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Cores.verdeAgua,
-                shape: StadiumBorder(),
-                side: BorderSide(
-                  color: Colors.white,
-                ),
-                fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height / 20),
-              ),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => Search()
-                )
-              ),
-              child: Row(
-                children: [
-                  IconButton(onPressed: (){}, icon: Icon(Icons.search, size: 20, color: Colors.white,)),
-                  Text(
-                    'Pesquisar',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white24,
-                      fontWeight: FontWeight.w700
+        Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Container(
+              width: MediaQuery.of(context).size.width/1.05,
+              height: MediaQuery.of(context).size.height/13,
+              child: Form(
+                child: TextFormField(
+                  controller: searchController,
+                  style: TextStyle(color: Colors.white),
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search, color: Colors.white,),
+                     suffixIcon: IconButton(onPressed: () {
+                      searchController.clear();
+                      setState(() {
+                        camp = 'tudo';
+                        query = "";
+                        isPesquisa = false;
+                      });
+                    }, icon: Icon(Icons.cancel_outlined, color: Colors.white)),
+                    fillColor: Cores.verdeAgua,
+                    filled: true,
+                    focusColor: Cores.verdeAgua,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none
                     ),
+                    hintText: 'Nome do Livro',
+                    hintStyle: TextStyle(color: Colors.white54)
                   ),
-                ],
-              ),
+                  onFieldSubmitted: (String pesquisa){
+                    setState(() {
+                      camp = 'nome';
+                      query = pesquisa;
+                      isPesquisa = true;
+                    });
+                  }
+                ),
+              )
             ),
           ),
-        ),
-
         Expanded(
           flex: 0,
           child: Container(
@@ -78,19 +98,19 @@ class _HomeState extends State<Home> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  
-                Categorie(categoria: "Ficção"),
-                Categorie(categoria: "Romance"),
-                Categorie(categoria: "Biografia"),
-                Categorie(categoria: "Infanto-Juvenis"),
-                Categorie(categoria: "Brasileiros"),
-                Categorie(categoria: "Poesias"),
-                Categorie(categoria: "Contos"),
-                Categorie(categoria: "Coleções"),
-                Categorie(categoria: "Técnicos"),
-                Categorie(categoria: "Auto Ajuda"),
-                Categorie(categoria: "Religiosos"),
-                Categorie(categoria: "Terror"),
+                CategoriaButton( "Todos"),
+                CategoriaButton( "Ficção"),
+                CategoriaButton( "Romance"),
+                CategoriaButton( "Biografia"),
+                CategoriaButton( "Infanto-Juvenis"),
+                CategoriaButton( "Brasileiros"),
+                CategoriaButton( "Poesias"),
+                CategoriaButton( "Contos"),
+                CategoriaButton( "Coleções"),
+                CategoriaButton( "Técnicos"),
+                CategoriaButton( "Auto Ajuda"),
+                CategoriaButton( "Religiosos"),
+                CategoriaButton( "Terror"),
                 
                 ],
               ),
@@ -105,52 +125,91 @@ class _HomeState extends State<Home> {
         Expanded(
           child: ScrollConfiguration(
             behavior: MyBehavior(),
-            child:  ListView(
-              children: [
-                FutureBuilder(
-                            future: books.get(),
-                            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-                              if (snapshot.hasError) {
-                                return Text("Something went wrong");
-                              }
+            child:  FutureBuilder(   
+                        future: Query(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
 
-                              if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
-                                return Text("Não existem livros cadastrados");
-                              }
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Center(
-                                    child: CircularProgressIndicator(
-                                  color: Cores.roxo,
-                                ));
-                              }
-                              else{
-                                List<String> data =
-                                    snapshot.data!.docs.map((e) => e.id).toList();
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        LivrosUI(livro: data[1], pag: 'home',),
-                                        LivrosUI(livro: data[2], pag: 'home'),
-                                      ],
-                                    ),
-                                  
-                                Row(
-                                  children: [
-                                    LivrosUI(livro: data[3], pag: 'home'),
-                                    LivrosUI(livro: data[4], pag: 'home'),
-                                  ],
+                          if (snapshot.hasData && snapshot.connectionState == ConnectionState.none) {
+                            return Text("Não existem livros cadastrados");
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: Cores.roxo,
+                            ));
+                          }
+                          else{
+                            List<String> data = snapshot.data!.docs.map((e) => e.id).toList();
+                            return GridView.builder(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.72,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10,
                                 ),
-                                ],
-                                );
-                              }
-                            }),
-              ],
-            ),
+                                itemCount: data.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return LivrosUI(livro: data[index], pag: 'home');
+                              });
+                          }
+                        }),
           ),
         ),
       ],
     );
+  }
+  CategoriaButton(String categoriaText){
+    return GestureDetector(
+      onTap: () {
+        if(categoriaText == "Todos"){
+          setState(() {
+          query = "";
+          camp = 'tudo';
+          isPesquisa=false;
+        });
+        }else{
+          setState(() {
+          camp='categoria';
+          query = categoriaText;          
+          isPesquisa=false;
+
+        });
+        }
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3.8,
+        alignment: Alignment.center,
+        child: Container(
+          width: MediaQuery.of(context).size.width / 4.1,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Cores.laranja,
+          ),
+          height: MediaQuery.of(context).size.height / 25,
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              categoriaText,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Future<QuerySnapshot<Object?>> Query() async{
+    if(isPesquisa == true){
+      return await books.where(camp, isGreaterThanOrEqualTo: query).get();
+    }else{
+      return await books.where(camp, isEqualTo: query).get();
+    } 
   }
 }

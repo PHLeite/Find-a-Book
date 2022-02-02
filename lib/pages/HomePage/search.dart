@@ -31,6 +31,12 @@ class _SearchState extends State<Search> {
                   cursorColor: Colors.white,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search, color: Colors.white,),
+                    suffix: IconButton(onPressed: () {
+                      searchController.clear();
+                      setState(() {
+                        
+                      });
+                    }, icon: Icon(Icons.cancel_outlined)),
                     fillColor: Cores.verdeAgua,
                     filled: true,
                     focusColor: Cores.verdeAgua,
@@ -41,9 +47,7 @@ class _SearchState extends State<Search> {
                     hintText: 'Nome do Livro',
                     hintStyle: TextStyle(color: Colors.white54)
                   ),
-                  onFieldSubmitted: (String _){
-                    print(_);
-                  }
+                  onFieldSubmitted: (String _){}
                 ),
               )
             ),
