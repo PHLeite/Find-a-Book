@@ -157,7 +157,7 @@ class _PerfilViewState extends State<PerfilView> {
                   Expanded(
                     child: FutureBuilder(
                           future:
-                              books.where('userEmail', isEqualTo: data['userEmail']).get(),
+                              books.where('userEmail', isEqualTo: widget.email).get(),
                           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                             if (snapshot.hasError) {
                               return Text("Something went wrong");
@@ -174,7 +174,7 @@ class _PerfilViewState extends State<PerfilView> {
                               ));
                             }
                             else{
-                             List<String> dataLi = snapshot.data!.docs.map((e) => e.id).toList();
+                             List<String> data = snapshot.data!.docs.map((e) => e.id).toList();
                                 return GridView.builder(
                                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
@@ -184,7 +184,7 @@ class _PerfilViewState extends State<PerfilView> {
                                     ),
                                     itemCount: data.length,
                                     itemBuilder: (BuildContext ctx, index) {
-                                      return LivrosUI(livro: dataLi[index], pag: 'home');
+                                      return LivrosUI(livro: data[index], pag: 'home');
                                   });
                             }
                           }),

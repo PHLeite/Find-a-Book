@@ -57,7 +57,7 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
         'categoria': categoria,
         'estado': item,
         'valor': valor.text,
-        'caseSearch': setSearchParam(nome.text),
+        // 'caseSearch': setSearchParam(nome.text),
         'tudo': ""
       }).then((value) => (documentID = value.id));
       uploadFoto();
@@ -424,13 +424,13 @@ class _CadastrarLivroState extends State<CadastrarLivro> {
         .putFile(file!);
     print("FOTO ADICIONADA AO FIREBASE");
   }
-  List<String> setSearchParam(String caseNumber) {
-  List<String> caseSearchList = List.empty();
-  String temp = "";
-  for (int i = 0; i <= caseNumber.length; i++) {
-    temp = temp + caseNumber[i];
-    caseSearchList.add(temp);
-  }
-  return caseSearchList;
-}
+//   List<String> setSearchParam(String caseNumber) {
+//   List<String> caseSearchList = List.empty();
+//   String temp = "";
+//   for (int i = 0; i <= caseNumber.length; i++) {
+//     temp = temp + caseNumber[i];
+//     caseSearchList.add(temp);
+//   }
+//   return caseSearchList;
+// }
 }

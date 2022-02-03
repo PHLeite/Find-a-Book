@@ -83,7 +83,7 @@ class _LivrosUIState extends State<LivrosUI> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 18,
-                          color: Colors.black
+                          color: Cores.roxo
                       ),
                     ),
                   ),

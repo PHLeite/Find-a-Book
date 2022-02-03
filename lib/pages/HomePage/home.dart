@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_a_book/core/cores.dart';
-import 'package:find_a_book/pages/HomePage/search.dart';
 import 'package:find_a_book/shared/components/livrosUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -88,7 +87,7 @@ class _HomeState extends State<Home> {
                   onFieldSubmitted: (String pesquisa){
                     
                     setState(() {
-                      camp = 'caseSearch';
+                      camp = 'nome';
                       query = pesquisa;
                       isPesquisa = true;
                     });
@@ -107,19 +106,19 @@ class _HomeState extends State<Home> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                CategoriaButton( "Todos"),
-                CategoriaButton( "Ficção"),
-                CategoriaButton( "Romance"),
-                CategoriaButton( "Biografia"),
-                CategoriaButton( "Infanto-Juvenis"),
-                CategoriaButton( "Brasileiros"),
-                CategoriaButton( "Poesias"),
-                CategoriaButton( "Contos"),
-                CategoriaButton( "Coleções"),
-                CategoriaButton( "Técnicos"),
-                CategoriaButton( "Auto Ajuda"),
-                CategoriaButton( "Religiosos"),
-                CategoriaButton( "Terror"),
+                categoriaButton( "Todos"),
+                categoriaButton( "Ficção"),
+                categoriaButton( "Romance"),
+                categoriaButton( "Biografia"),
+                categoriaButton( "Infanto-Juvenis"),
+                categoriaButton( "Brasileiros"),
+                categoriaButton( "Poesias"),
+                categoriaButton( "Contos"),
+                categoriaButton( "Coleções"),
+                categoriaButton( "Técnicos"),
+                categoriaButton( "Auto Ajuda"),
+                categoriaButton( "Religiosos"),
+                categoriaButton( "Terror"),
                 
                 ],
               ),
@@ -135,7 +134,7 @@ class _HomeState extends State<Home> {
           child: ScrollConfiguration(
             behavior: MyBehavior(),
             child:  FutureBuilder(   
-                        future: Query(),
+                        future: futureQuery(),
                         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                           if (snapshot.hasError) {
                             return Text("Something went wrong");
@@ -144,12 +143,12 @@ class _HomeState extends State<Home> {
                           if (snapshot.data!.docs.length == 0) {
                             return Text("Não existem livros cadastrados");
                           }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
+                          if (snapshot.connectionState == ConnectionState.waiting ) {
                             return Center(
-                                child: CircularProgressIndicator(
-                              color: Cores.roxo,
-                            ));
+                              child: CircularProgressIndicator(
+                                color: Cores.roxo,
+                              )
+                            );
                           }
                           else{
                             List<String> data = snapshot.data!.docs.map((e) => e.id).toList();
@@ -171,7 +170,7 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-  CategoriaButton(String categoriaText){
+  categoriaButton(String categoriaText){
     return GestureDetector(
       onTap: () {
         if(categoriaText == "Todos"){
@@ -214,10 +213,10 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  Future<QuerySnapshot<Object?>> Query() async{
+  Future<QuerySnapshot<Object?>> futureQuery() async{
     if(isPesquisa == true){
       print(query);
-      return await books.where(camp, arrayContains: query).get();
+      return await books.where(camp, isGreaterThanOrEqualTo: query).get();
     }else{
       return await books.where(camp, isEqualTo: query).get();
     } 
